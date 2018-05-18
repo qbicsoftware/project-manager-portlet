@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: life.qbic.openbis:openbis_api:3-S253.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/life/qbic/openbis/openbis_api/3-S253.0/openbis_api-3-S253.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/life/qbic/openbis/openbis_api/3-S253.0/openbis_api-3-S253.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/life/qbic/openbis/openbis_api/3-S253.0/openbis_api-3-S253.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: life.qbic:portal-utils-lib:1.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/life/qbic/portal-utils-lib/1.0.0-SNAPSHOT/portal-utils-lib-1.0.0-20180516.153841-14.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/life/qbic/portal-utils-lib/1.0.0-SNAPSHOT/portal-utils-lib-1.0.0-20180516.153841-14-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/life/qbic/portal-utils-lib/1.0.0-SNAPSHOT/portal-utils-lib-1.0.0-20180516.153841-14-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
