@@ -1,2 +1,0 @@
-# Module life.qbic.portlet.AppWidgetSet
-# RPC service class, partial path of RPC policy file
