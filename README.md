@@ -6,7 +6,7 @@ Project Manager Portlet, version 0.0.1-SNAPSHOT - Portlet for managing projects 
 
 ## Author
 
-Created by Julian Spaeth (julian.spaethj@student.uni-tuebingen.de).
+Created by Julian Spaeth (julian.spaeth@student.uni-tuebingen.de).
 
 ## Description
 
