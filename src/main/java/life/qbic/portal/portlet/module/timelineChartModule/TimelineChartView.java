@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class TimelineChartView extends Chart {
 
-  private DataSeries unregisteredSeries, intimeSeries, overdueSeries, potentialtimeSeries;
+  private DataSeries unregisteredSeries, intimeSeries, overdueSeries, timeLeftSeries;
 
   private Configuration conf;
 
@@ -69,14 +69,14 @@ public class TimelineChartView extends Chart {
     intimeSeries.setPlotOptions(o);
     intimeSeries.setName("In time");
 
-    potentialtimeSeries = new DataSeries();
+    timeLeftSeries = new DataSeries();
     o = new PlotOptionsColumnrange();
-    o.setColor(new SolidColor("#79A65B"));
-    potentialtimeSeries.setPlotOptions(o);
-    potentialtimeSeries.setName("pot. time");
+    o.setColor(new SolidColor("#85929E"));
+    timeLeftSeries.setPlotOptions(o);
+    timeLeftSeries.setName("Time left");
 
     conf.getChart().setBackgroundColor(new SolidColor("#fafafa"));
-    conf.addSeries(potentialtimeSeries);
+    conf.addSeries(timeLeftSeries);
     conf.addSeries(unregisteredSeries);
     conf.addSeries(overdueSeries);
     conf.addSeries(intimeSeries);
@@ -107,7 +107,7 @@ public class TimelineChartView extends Chart {
     return conf;
   }
 
-  public DataSeries getPotentialtimeSeries() {
-    return potentialtimeSeries;
+  public DataSeries getTimeLeftSeries() {
+    return timeLeftSeries;
   }
 }
