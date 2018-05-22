@@ -50,14 +50,6 @@ public class MasterPresenter {
     makeFilter();
     projectOverviewPresenter.init();
 
-    projectOverviewPresenter.getSelectedProject().addValueChangeListener(event -> {
-      projectSheetPresenter
-          .showInfoForProject(projectOverviewPresenter.getSelectedProjectItem());
-      if (projectOverviewPresenter.getSelectedProject().getValue() != null) {
-        projectSheetPresenter.getProjectSheetView().createSubWindow();
-      }
-    });
-
     projectOverviewPresenter.getIsChangedFlag().addValueChangeListener(this::refreshModuleViews);
 
     projectSheetPresenter.getInformationCommittedFlag()

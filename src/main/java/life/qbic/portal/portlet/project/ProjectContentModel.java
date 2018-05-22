@@ -125,6 +125,7 @@ public class ProjectContentModel {
         writeSamples(itemId, project);
         writeSpecies(itemId, project);
         writeSampleTypes(itemId, project);
+        writeOfferID(itemId, project);
       }
     }
   }
@@ -205,6 +206,15 @@ public class ProjectContentModel {
       projectPI = "unknown";
     }
     tableContent.getContainerProperty(itemId, "investigatorName").setValue(projectPI);
+  }
+
+  private void writeOfferID(Object itemId, Project project) {
+    String offerID = userManagementDB.getOfferID(project.getCode());
+    if (offerID == null || offerID.equals("")) {
+      offerID = "";
+    }
+    tableContent.getContainerProperty(itemId, "offerID").setValue(offerID);
+
   }
 
   public LinkedHashMap<String, Integer> writeNumberProjectsPerTimeIntervalFromStart() {

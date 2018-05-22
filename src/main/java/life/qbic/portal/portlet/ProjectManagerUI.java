@@ -121,6 +121,17 @@ public class ProjectManagerUI extends QBiCPortletUI {
       }
     });
 
+    // Init details button
+    projectOVPresenter.getDetailsButton().addClickListener(event -> {
+      String id = projectOVPresenter.getSelectedProject().getValue();
+      projectSheetPresenter
+          .showInfoForProject(projectOVPresenter.getSelectedProjectItem());
+      if (projectOVPresenter.getSelectedProject().getValue() != null) {
+        projectSheetPresenter.getProjectSheetView().createSubWindow();
+      }
+
+    });
+
     // Init slider
     SliderPanel sliderPanel = new SliderPanelBuilder(followerView.getUI())
         .caption("FOLLOW PROJECTS")

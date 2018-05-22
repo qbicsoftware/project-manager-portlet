@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 public class UserManagementDB {
 
-  private static final Logger LOG = LogManager.getLogger(ProjectManagerUI.class);
+  private static final Logger LOG = LogManager.getLogger(UserManagementDB.class);
   private String portNumber = "3306";
   private String serverName = "portal-testing.am10.uni-tuebingen.de";
   private Connection conn = null;
@@ -151,6 +151,32 @@ public class UserManagementDB {
   public String getProjectPI(String projectCode) {
     String pi = getPI(getPIID(getProjectID(projectCode)));
     return pi;
+  }
+
+  public String getOfferID(String projectCode) {
+    Statement stmt = null;
+    String offerID = "";
+    String query = "SELECT id " +
+        "FROM " + "facs_facility" + ".offers" +
+        " WHERE " + "offer_project_reference" + " LIKE " + "'%" + projectCode + "%'";
+    try {
+      stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(query);
+      while (rs.next()) {
+        offerID = rs.getString("offer_number");
+      }
+    } catch (Exception e) {
+      LOG.error("No offer for project " + projectCode + " in the facs facility DB.");
+    } finally {
+      if (stmt != null) {
+        try {
+          stmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return offerID;
   }
 
 

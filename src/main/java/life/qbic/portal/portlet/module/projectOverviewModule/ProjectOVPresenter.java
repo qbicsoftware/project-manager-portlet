@@ -48,7 +48,7 @@ import org.vaadin.gridutil.cell.GridCellFilter;
  */
 public class ProjectOVPresenter {
 
-  private static final Logger LOG = LogManager.getLogger(ProjectManagerUI.class);
+  private static final Logger LOG = LogManager.getLogger(ProjectOVPresenter.class);
   private ProjectContentModel contentModel;
   private ProjectOverviewModule overViewModule;
   private String overviewTable = "projectsoverview";
@@ -57,6 +57,7 @@ public class ProjectOVPresenter {
   private ProjectDatabaseConnector connection;
 
   private Button unfollowButton = new Button("Unfollow");
+  private Button detailsButton = new Button("Details");
   private String portalURL = "https://portal.qbic.uni-tuebingen.de/portal/web/qbic/qnavigator#!project/";
   private ColumnFieldTypes columnFieldTypes;
   private OverviewChartPresenter overviewChartPresenter;
@@ -78,6 +79,10 @@ public class ProjectOVPresenter {
     unfollowButton.setIcon(FontAwesome.MINUS_CIRCLE);
     unfollowButton.setStyleName(ValoTheme.BUTTON_DANGER);
     unfollowButton.setEnabled(false);
+
+    detailsButton.setIcon(FontAwesome.INFO_CIRCLE);
+    detailsButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+    detailsButton.setEnabled(false);
   }
 
   /**
@@ -104,17 +109,17 @@ public class ProjectOVPresenter {
 
       overViewModule.getOverviewGrid().addItemClickListener(event -> {
         this.selectedProjectItem = event.getItem();
-        this.selectedProject.setValue((String) event.getItem()
-            .getItemProperty(TableColumns.PROJECTOVERVIEWTABLE.get(ColumnTypes.PROJECTID))
-            .getValue());
+        this.selectedProject.setValue((String) event.getItem().getItemProperty(TableColumns.PROJECTOVERVIEWTABLE.get(ColumnTypes.PROJECTID)).getValue());
       });
     }
 
     selectedProject.addValueChangeListener((ValueChangeListener) event -> {
       if (selectedProject.getValue() != null) {
         unfollowButton.setEnabled(true);
+        detailsButton.setEnabled(true);
       } else {
         unfollowButton.setEnabled(false);
+        detailsButton.setEnabled(false);
       }
     });
 
@@ -159,7 +164,7 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().getColumn("rawDataRegistered").setEditable(false);
     overViewModule.getOverviewGrid().getColumn("dataAnalyzedDate").setEditable(false);
     overViewModule.getOverviewGrid().getColumn("projectTime").setEditable(false);
-    overViewModule.getOverviewGrid().getColumn("offerID").setEditable(true);
+    overViewModule.getOverviewGrid().getColumn("offerID").setEditable(false);
     overViewModule.getOverviewGrid().getColumn("invoice").setEditable(true);
 
 //    overViewModule.getOverviewGrid().setRowStyleGenerator(rowRef -> {// Java 8
@@ -301,12 +306,14 @@ public class ProjectOVPresenter {
     HorizontalLayout buttonLayout = new HorizontalLayout();
     buttonLayout.setSpacing(true);
     firstHeaderRow.getCell("projectID").setComponent(buttonLayout);
-    Button clearAllFilters = new Button("clear Filters", (Button.ClickListener) clickEvent ->
+    Button clearAllFilters = new Button("", (Button.ClickListener) clickEvent ->
         filter.clearAllFilters());
+    clearAllFilters.setDescription("Clear all filters.");
     clearAllFilters.setIcon(FontAwesome.TIMES);
     clearAllFilters.addStyleName(ValoTheme.BUTTON_PRIMARY);
-    buttonLayout.addComponents(clearAllFilters, unfollowButton);
-    buttonLayout.setComponentAlignment(unfollowButton, Alignment.MIDDLE_LEFT);
+    buttonLayout.addComponents(clearAllFilters, unfollowButton, detailsButton);
+    buttonLayout.setComponentAlignment(unfollowButton, Alignment.MIDDLE_RIGHT);
+    buttonLayout.setComponentAlignment(detailsButton, Alignment.MIDDLE_LEFT);
   }
 
 
@@ -469,6 +476,7 @@ public class ProjectOVPresenter {
   public void clearSelection() {
     overViewModule.getOverviewGrid().getSelectionModel().reset();
     unfollowButton.setEnabled(false);
+    detailsButton.setEnabled(false);
   }
 
   public Map<String, Integer> getTimeLineStats() {
@@ -477,5 +485,9 @@ public class ProjectOVPresenter {
 
   public Button getUnfollowButton() {
     return unfollowButton;
+  }
+
+  public Button getDetailsButton() {
+    return detailsButton;
   }
 }
