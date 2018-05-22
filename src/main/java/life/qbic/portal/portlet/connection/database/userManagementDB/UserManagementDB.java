@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 public class UserManagementDB {
 
-  private static final Logger LOG = LogManager.getLogger(ProjectManagerUI.class);
+  private static final Logger LOG = LogManager.getLogger(UserManagementDB.class);
   private String portNumber = "3306";
   private String serverName = "portal-testing.am10.uni-tuebingen.de";
   private Connection conn = null;

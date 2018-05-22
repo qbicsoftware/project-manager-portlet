@@ -48,7 +48,7 @@ import org.vaadin.gridutil.cell.GridCellFilter;
  */
 public class ProjectOVPresenter {
 
-  private static final Logger LOG = LogManager.getLogger(ProjectManagerUI.class);
+  private static final Logger LOG = LogManager.getLogger(ProjectOVPresenter.class);
   private ProjectContentModel contentModel;
   private ProjectOverviewModule overViewModule;
   private String overviewTable = "projectsoverview";

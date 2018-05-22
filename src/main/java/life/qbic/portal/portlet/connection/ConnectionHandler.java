@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ConnectionHandler {
 
-  private static final Logger LOG = LogManager.getLogger(ProjectManagerUI.class);
+  private static final Logger LOG = LogManager.getLogger(ConnectionHandler.class);
   private String mysqlUser, mysqlPW, openBisPw, openBisUser;
   private ConfigurationManager conf = ConfigurationManagerFactory.getInstance();
   private UserManagementDB userManagementDB;
