@@ -310,7 +310,7 @@ public class ProjectOVPresenter {
         filter.clearAllFilters());
     clearAllFilters.setDescription("Clear all filters.");
     clearAllFilters.setIcon(FontAwesome.TIMES);
-    clearAllFilters.addStyleName(ValoTheme.BUTTON_PRIMARY);
+    clearAllFilters.addStyleName(ValoTheme.BUTTON_QUIET);
     buttonLayout.addComponents(clearAllFilters, unfollowButton, detailsButton);
     buttonLayout.setComponentAlignment(unfollowButton, Alignment.MIDDLE_RIGHT);
     buttonLayout.setComponentAlignment(detailsButton, Alignment.MIDDLE_LEFT);
