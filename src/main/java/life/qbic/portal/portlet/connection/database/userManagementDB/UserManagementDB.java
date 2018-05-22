@@ -153,5 +153,31 @@ public class UserManagementDB {
     return pi;
   }
 
+  public String getOfferID(String projectCode) {
+    Statement stmt = null;
+    String offerID = "";
+    String query = "SELECT id " +
+        "FROM " + "facs_facility" + ".offers" +
+        " WHERE " + "offer_project_reference" + " LIKE " + "'%" + projectCode + "%'";
+    try {
+      stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(query);
+      while (rs.next()) {
+        offerID = rs.getString("offer_number");
+      }
+    } catch (Exception e) {
+      LOG.error("No offer for project " + projectCode + " in the facs facility DB.");
+    } finally {
+      if (stmt != null) {
+        try {
+          stmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return offerID;
+  }
+
 
 }
