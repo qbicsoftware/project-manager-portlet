@@ -28,7 +28,7 @@ public class ConnectionHandler {
   private ProjectDatabase projectDatabase;
   private OpenBisConnection openBisConnection;
 
-  private String propertyFilePath = "/Users/spaethju/liferay/qbic-ext.properties";
+  private String propertyFilePath = "/Users/spaethju/qbic-ext.properties";
 
   public ConnectionHandler(ProjectFilter projectFilter) {
     setCredentials();
@@ -89,7 +89,6 @@ public class ConnectionHandler {
     } else {
       LOG.info("No Liferay Portlet found. Get user and passwords from local file.");
       getCredentials(propertyFilePath);
-      openBisUser = "zxmqw74";
     }
   }
 
@@ -106,6 +105,7 @@ public class ConnectionHandler {
 
       // get the property value and print it out
       openBisPw = prop.getProperty("datasource.password");
+      openBisUser = prop.getProperty("datasource.user");
       mysqlPW = prop.getProperty("mysql.pass");
       mysqlUser = prop.getProperty("mysql.user");
 

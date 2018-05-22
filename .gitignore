@@ -76,3 +76,19 @@ fabric.properties
 .idea/httpRequests
 
 target/
+
+\.idea/artifacts/project_manager_portlet_war_exploded\.xml
+
+\.idea/artifacts/project_manager_portlet_war\.xml
+
+\.idea/codeStyles/codeStyleConfig\.xml
+
+\.idea/compiler\.xml
+
+\.idea/encodings\.xml
+
+\.idea/misc\.xml
+
+\.idea/modules\.xml
+
+\.idea/project-manager-portlet\.iml
