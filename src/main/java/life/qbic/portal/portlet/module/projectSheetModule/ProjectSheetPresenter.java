@@ -140,14 +140,17 @@ public class ProjectSheetPresenter {
   private Button getExportButton() {
     String fileName = currentItem.getItemProperty("projectID").getValue().toString();
     String projectName =
-        "Project: " + currentItem.getItemProperty("projectID").getValue().toString();
+        "Project," + currentItem.getItemProperty("projectID").getValue().toString();
     String projectStatus =
-        "Status: " + currentItem.getItemProperty("projectTime").getValue().toString();
-    String projectDescription = "Description: " + currentItem.getItemProperty("description");
-    String projectPI = "PI: " + currentItem.getItemProperty("investigatorName");
-    String projectSpecies = "Species: " + currentItem.getItemProperty("species");
-    String projectSamples = "Samples: " + currentItem.getItemProperty("samples");
-    String projectSampleTypes = "Sample Types: " + currentItem.getItemProperty("sampleTypes");
+        "Status," + currentItem.getItemProperty("projectTime").getValue().toString();
+    String projectDescription = "Description," + currentItem.getItemProperty("description");
+    String projectPI = "PI," + currentItem.getItemProperty("investigatorName");
+    String projectSpecies = "Species," + currentItem.getItemProperty("species");
+    String projectSamples = "Samples," + currentItem.getItemProperty("samples");
+    String projectSampleTypes = "Sample Types," + currentItem.getItemProperty("sampleTypes");
+    String projectRegisteredDate ="Project Registered," + currentItem.getItemProperty("projectRegisteredDate");
+    String rawDataRegisteredDate ="Raw Data Registered," + currentItem.getItemProperty("rawDataRegistered");
+    String dataAnalyzedDate ="Data Analyzed," + currentItem.getItemProperty("dataAnalyzedDate");
 
     try {
       File projectFile = File.createTempFile(fileName, ".txt");
@@ -166,6 +169,12 @@ public class ProjectSheetPresenter {
       bw.write(projectSamples);
       bw.newLine();
       bw.write(projectSampleTypes);
+      bw.newLine();
+      bw.write(projectRegisteredDate);
+      bw.newLine();
+      bw.write(rawDataRegisteredDate);
+      bw.newLine();
+      bw.write(dataAnalyzedDate);
       bw.close();
       fw.close();
       FileResource res = new FileResource(projectFile);
