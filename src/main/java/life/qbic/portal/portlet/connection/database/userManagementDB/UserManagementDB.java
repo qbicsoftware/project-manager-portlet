@@ -20,6 +20,7 @@ public class UserManagementDB {
   private static final Logger LOG = LogManager.getLogger(UserManagementDB.class);
   private String portNumber = "3306";
   private String serverName = "portal-testing.am10.uni-tuebingen.de";
+  private String connectionURI = "jdbc:mysql://portal-testing.am10.uni-tuebingen.de:3306/qbic_usermanagement_db";
   private Connection conn = null;
 
   public UserManagementDB(String userName, String password) {
@@ -29,9 +30,7 @@ public class UserManagementDB {
 
     try {
       Class.forName("com.mysql.jdbc.Driver");
-      conn = DriverManager.getConnection(
-          "jdbc:mysql://" + this.serverName + ":" + this.portNumber + "/",
-          connectionProps);
+      conn = DriverManager.getConnection(connectionURI, userName, password);
       LOG.info("Connection to user management DB established.");
     } catch (SQLException e) {
       LOG.error("Connection to user management DB failed. [SQLException]");
