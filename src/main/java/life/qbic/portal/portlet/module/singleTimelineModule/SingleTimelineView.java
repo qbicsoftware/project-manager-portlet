@@ -65,7 +65,7 @@ public class SingleTimelineView extends Chart {
     potentialtimeSeries.setPlotOptions(o);
     potentialtimeSeries.setName("pot. time");
 
-    conf.getChart().setBackgroundColor(new SolidColor("#fafafa"));
+    conf.getChart().setBackgroundColor(new SolidColor("#ffffff"));
     conf.addSeries(potentialtimeSeries);
     conf.addSeries(unregisteredSeries);
     conf.addSeries(overdueSeries);

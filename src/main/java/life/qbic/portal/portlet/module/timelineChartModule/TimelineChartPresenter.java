@@ -37,7 +37,7 @@ public class TimelineChartPresenter {
     view.getUnregisteredSeries().clear();
     view.getIntimeSeries().clear();
     view.getOverdueSeries().clear();
-    view.getPotentialtimeSeries().clear();
+    view.getTimeLeftSeries().clear();
 
     Collection<?> itemIds = tableContent.getItemIds();
     for (Object itemId : itemIds) {
@@ -87,14 +87,14 @@ public class TimelineChartPresenter {
       DataSeriesItem intimeItem = new DataSeriesItem();
       intimeItem.setName(projectID);
       intimeItem.setLow(rawDataRegisteredDate.getTime());
-      DataSeriesItem pottimeItem = new DataSeriesItem();
+      DataSeriesItem timeLeftItem = new DataSeriesItem();
       Calendar c = Calendar.getInstance();
       c.setTime(rawDataRegisteredDate);
       c.add(Calendar.DATE, 42);
       Date overdueDate = c.getTime();
-      pottimeItem.setName(projectID);
-      pottimeItem.setLow(rawDataRegisteredDate.getTime());
-      pottimeItem.setHigh(overdueDate.getTime());
+      timeLeftItem.setName(projectID);
+      timeLeftItem.setLow(rawDataRegisteredDate.getTime());
+      timeLeftItem.setHigh(overdueDate.getTime());
 
       if (dataAnalyzedDate == null) {
         long diffRawToday = getDateDiff(rawDataRegisteredDate, currentDate);
@@ -112,7 +112,7 @@ public class TimelineChartPresenter {
         long diffRawDataAnalyzed = getDateDiff(rawDataRegisteredDate, dataAnalyzedDate);
         if (diffRawDataAnalyzed < 42) {
           intimeItem.setHigh(dataAnalyzedDate.getTime());
-          pottimeItem.setHigh(overdueDate.getTime());
+          timeLeftItem.setHigh(overdueDate.getTime());
         } else {
           intimeItem.setHigh(overdueDate.getTime());
           DataSeriesItem overdueItem = new DataSeriesItem();
@@ -122,7 +122,7 @@ public class TimelineChartPresenter {
           view.getOverdueSeries().add(overdueItem);
         }
       }
-      view.getPotentialtimeSeries().add(pottimeItem);
+      view.getTimeLeftSeries().add(timeLeftItem);
       view.getIntimeSeries().add(intimeItem);
     }
   }
