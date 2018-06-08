@@ -24,20 +24,20 @@ public class UserManagementDB {
 
   public UserManagementDB(String userName, String password) {
     Properties connectionProps = new Properties();
-    System.out.println(userName + password);
     connectionProps.put("user", userName);
     connectionProps.put("password", password);
 
     try {
+      Class.forName("com.mysql.jdbc.Driver");
       conn = DriverManager.getConnection(
           "jdbc:mysql://" + this.serverName + ":" + this.portNumber + "/",
           connectionProps);
       LOG.info("Connection to user management DB established.");
     } catch (SQLException e) {
-      LOG.error("Connection to user management DB failed.");
-      Notification notif = new Notification("Connection to user management db failed!", Type.ERROR_MESSAGE);
-      notif.setDelayMsec(500000000);
-      notif.show(Page.getCurrent());
+      LOG.error("Connection to user management DB failed. [SQLException]");
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      LOG.error("Connection to user management DB failed. [ClassNotFoundException]");
       e.printStackTrace();
     }
   }

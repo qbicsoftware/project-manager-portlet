@@ -18,7 +18,6 @@ import life.qbic.portal.portlet.connection.database.userManagementDB.UserManagem
 import life.qbic.portal.portlet.connection.openbis.OpenBisConnection;
 import life.qbic.portal.utils.ConfigurationManager;
 import life.qbic.portal.utils.ConfigurationManagerFactory;
-import life.qbic.portal.utils.PortalUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,7 +34,6 @@ public class ConnectionHandler {
 
   public ConnectionHandler(ProjectFilter projectFilter) {
     setCredentials();
-    LOG.info(mysqlUser, openBisUser);
     userManagementDB = new UserManagementDB(mysqlUser, mysqlPW);
     projectDatabase = new ProjectDatabase(mysqlUser, mysqlPW, projectFilter);
     try {
@@ -89,7 +87,10 @@ public class ConnectionHandler {
       mysqlPW = conf.getMysqlPass();
       openBisUser = conf.getDataSourceUser();
       openBisPw = conf.getDataSourcePassword();
-      LOG.info(mysqlUser, openBisUser);
+      LOG.info(mysqlUser + " " + openBisUser);
+      if (mysqlUser == null || openBisUser == null) {
+        throw new Exception();
+      }
     } catch (Exception e) {
       LOG.info("No Liferay Portlet found. Get user and passwords from local file.");
       getCredentials(propertyFilePath);
