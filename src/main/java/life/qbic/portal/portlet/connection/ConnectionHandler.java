@@ -3,7 +3,9 @@ package life.qbic.portal.portlet.connection;
 import ch.ethz.sis.openbis.generic.asapi.v3.IApplicationServerApi;
 import ch.ethz.sis.openbis.generic.dssapi.v3.IDataStoreServerApi;
 import ch.systemsx.cisd.common.spring.HttpInvokerUtils;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,7 +42,9 @@ public class ConnectionHandler {
       LOG.info("Connection to project DB established.");
     } catch (Exception e) {
       LOG.info("Connection to project DB failed.");
-      Notification.show("Connection to project DB failed.");
+      Notification notif = new Notification("Connection to projectDB failed!", Type.ERROR_MESSAGE);
+      notif.setDelayMsec(500000000);
+      notif.show(Page.getCurrent());
       //e.printStackTrace();
     }
 
@@ -70,7 +74,9 @@ public class ConnectionHandler {
 
     } catch (Exception e) {
         LOG.error("Connection to openBIS failed.");
-      Notification.show("Connection to openBIS failed.");
+      Notification notif = new Notification("Connection to openbis failed!", Type.ERROR_MESSAGE);
+      notif.setDelayMsec(500000000);
+      notif.show(Page.getCurrent());
         //e.printStackTrace();
       }
 
@@ -86,7 +92,9 @@ public class ConnectionHandler {
       openBisPw = conf.getDataSourcePassword();
     } else {
       LOG.info("No Liferay Portlet found. Get user and passwords from local file.");
-      Notification.show("No Liferay-Portlet found");
+      Notification notif = new Notification("No liferay portlet!", Type.ERROR_MESSAGE);
+      notif.setDelayMsec(500000000);
+      notif.show(Page.getCurrent());
       getCredentials(propertyFilePath);
     }
   }
