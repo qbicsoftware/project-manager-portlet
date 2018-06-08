@@ -37,7 +37,7 @@ public class UserManagementDB {
       Notification notif = new Notification("Connection to user management db failed!", Type.ERROR_MESSAGE);
       notif.setDelayMsec(500000000);
       notif.show(Page.getCurrent());
-      //e.printStackTrace();
+      e.printStackTrace();
     }
   }
 
