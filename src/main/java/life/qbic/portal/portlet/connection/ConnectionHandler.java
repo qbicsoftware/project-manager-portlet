@@ -35,6 +35,7 @@ public class ConnectionHandler {
 
   public ConnectionHandler(ProjectFilter projectFilter) {
     setCredentials();
+    LOG.info(mysqlUser, openBisUser);
     userManagementDB = new UserManagementDB(mysqlUser, mysqlPW);
     projectDatabase = new ProjectDatabase(mysqlUser, mysqlPW, projectFilter);
     try {
@@ -45,7 +46,6 @@ public class ConnectionHandler {
       Notification notif = new Notification("Connection to projectDB failed!", Type.ERROR_MESSAGE);
       notif.setDelayMsec(500000000);
       notif.show(Page.getCurrent());
-      //e.printStackTrace();
     }
 
     openBisConnection = connectToOpenBis();
@@ -77,7 +77,6 @@ public class ConnectionHandler {
       Notification notif = new Notification("Connection to openbis failed!", Type.ERROR_MESSAGE);
       notif.setDelayMsec(500000000);
       notif.show(Page.getCurrent());
-        //e.printStackTrace();
       }
 
     return openBisConnection;
@@ -93,7 +92,6 @@ public class ConnectionHandler {
       LOG.info(mysqlUser, openBisUser);
     } catch (Exception e) {
       LOG.info("No Liferay Portlet found. Get user and passwords from local file.");
-
       getCredentials(propertyFilePath);
     }
   }
@@ -117,13 +115,12 @@ public class ConnectionHandler {
 
     } catch (IOException ex) {
       LOG.error("Could not find the property file. ");
-      //ex.printStackTrace();
     } finally {
       if (input != null) {
         try {
           input.close();
         } catch (IOException e) {
-          e.printStackTrace();
+          LOG.error("Could not find the property file");
         }
       }
     }
