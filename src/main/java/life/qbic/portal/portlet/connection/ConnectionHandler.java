@@ -9,9 +9,7 @@ import com.vaadin.ui.Notification.Type;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Properties;
-import life.qbic.portal.portlet.ProjectManagerUI;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.ProjectDatabase;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.ProjectFilter;
 import life.qbic.portal.portlet.connection.database.userManagementDB.UserManagementDB;
@@ -52,12 +50,6 @@ public class ConnectionHandler {
   public OpenBisConnection connectToOpenBis() {
     try {
 
-      // Connect to openbis
-      IDataStoreServerApi dss =
-          HttpInvokerUtils.createStreamSupportingServiceStub(IDataStoreServerApi.class,
-              "https://qbis.qbic.uni-tuebingen.de:444/datastore_server"
-                  + IDataStoreServerApi.SERVICE_URL, 10000);
-
       // get a reference to AS API
       IApplicationServerApi app = HttpInvokerUtils.createServiceStub(IApplicationServerApi.class,
           "https://qbis.qbic.uni-tuebingen.de/openbis/openbis" + IApplicationServerApi.SERVICE_URL,
@@ -67,7 +59,7 @@ public class ConnectionHandler {
 
       LOG.info("Connect user " + openBisUser + " to openbis.");
       sessionToken = app.login(openBisUser, openBisPw);
-      openBisConnection = new OpenBisConnection(app, dss, sessionToken);
+      openBisConnection = new OpenBisConnection(app, sessionToken);
       LOG.info("Connection to openBIS established.");
 
     } catch (Exception e) {
