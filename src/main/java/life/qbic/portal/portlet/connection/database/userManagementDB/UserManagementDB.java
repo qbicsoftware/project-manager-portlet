@@ -1,5 +1,6 @@
 package life.qbic.portal.portlet.connection.database.userManagementDB;
 
+import com.vaadin.ui.Notification;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -31,7 +32,8 @@ public class UserManagementDB {
       LOG.info("Connection to user management DB established.");
     } catch (SQLException e) {
       LOG.error("Connection to user management DB failed.");
-      e.printStackTrace();
+      Notification.show("Connection to user management DB failed.");
+      //e.printStackTrace();
     }
   }
 

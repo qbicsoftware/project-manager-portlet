@@ -3,6 +3,7 @@ package life.qbic.portal.portlet.connection;
 import ch.ethz.sis.openbis.generic.asapi.v3.IApplicationServerApi;
 import ch.ethz.sis.openbis.generic.dssapi.v3.IDataStoreServerApi;
 import ch.systemsx.cisd.common.spring.HttpInvokerUtils;
+import com.vaadin.ui.Notification;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +40,8 @@ public class ConnectionHandler {
       LOG.info("Connection to project DB established.");
     } catch (Exception e) {
       LOG.info("Connection to project DB failed.");
-      e.printStackTrace();
+      Notification.show("Connection to project DB failed.");
+      //e.printStackTrace();
     }
 
     openBisConnection = connectToOpenBis();
@@ -68,7 +70,8 @@ public class ConnectionHandler {
 
     } catch (Exception e) {
         LOG.error("Connection to openBIS failed.");
-        e.printStackTrace();
+      Notification.show("Connection to openBIS failed.");
+        //e.printStackTrace();
       }
 
     return openBisConnection;
@@ -83,6 +86,7 @@ public class ConnectionHandler {
       openBisPw = conf.getDataSourcePassword();
     } else {
       LOG.info("No Liferay Portlet found. Get user and passwords from local file.");
+      Notification.show("No Liferay-Portlet found");
       getCredentials(propertyFilePath);
     }
   }
@@ -106,7 +110,7 @@ public class ConnectionHandler {
 
     } catch (IOException ex) {
       LOG.error("Could not find the property file. ");
-      ex.printStackTrace();
+      //ex.printStackTrace();
     } finally {
       if (input != null) {
         try {
