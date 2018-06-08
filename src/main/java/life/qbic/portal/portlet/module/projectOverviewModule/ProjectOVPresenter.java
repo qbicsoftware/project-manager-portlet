@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import life.qbic.portal.portlet.ProjectManagerUI;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.ColumnTypes;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.ProjectDatabaseConnector;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.TableColumns;
@@ -58,6 +57,7 @@ public class ProjectOVPresenter {
 
   private Button unfollowButton = new Button("Unfollow");
   private Button detailsButton = new Button("Details");
+  private Button exportButton = new Button("Export");
   private String portalURL = "https://portal.qbic.uni-tuebingen.de/portal/web/qbic/qnavigator#!project/";
   private ColumnFieldTypes columnFieldTypes;
   private OverviewChartPresenter overviewChartPresenter;
@@ -127,6 +127,8 @@ public class ProjectOVPresenter {
     overviewChartPresenter.getChart().addPointClickListener((PointClickListener) event -> {
       setFilter("projectTime", overviewChartPresenter.getChart().getDataSeriesObject(event));
     });
+
+    exportButton=contentModel.exportProjects();
 
   }
 
@@ -311,7 +313,8 @@ public class ProjectOVPresenter {
     clearAllFilters.setDescription("Clear all filters.");
     clearAllFilters.setIcon(FontAwesome.TIMES);
     clearAllFilters.addStyleName(ValoTheme.BUTTON_QUIET);
-    buttonLayout.addComponents(clearAllFilters, unfollowButton, detailsButton);
+    exportButton = contentModel.exportProjects();
+    buttonLayout.addComponents(clearAllFilters, unfollowButton, detailsButton, exportButton);
     buttonLayout.setComponentAlignment(unfollowButton, Alignment.MIDDLE_RIGHT);
     buttonLayout.setComponentAlignment(detailsButton, Alignment.MIDDLE_LEFT);
   }
@@ -489,5 +492,13 @@ public class ProjectOVPresenter {
 
   public Button getDetailsButton() {
     return detailsButton;
+  }
+
+  public Button getExportButton() {
+    return exportButton;
+  }
+
+  public void setExportButton(Button exportButton) {
+    this.exportButton = exportButton;
   }
 }

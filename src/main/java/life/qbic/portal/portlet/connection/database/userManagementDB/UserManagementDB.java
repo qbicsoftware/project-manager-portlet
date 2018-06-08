@@ -166,7 +166,7 @@ public class UserManagementDB {
         offerID = rs.getString("offer_number");
       }
     } catch (Exception e) {
-      LOG.error("No offer for project " + projectCode + " in the facs facility DB.");
+      LOG.info("No offer found for project " + projectCode + " in the facs facility DB.");
     } finally {
       if (stmt != null) {
         try {
