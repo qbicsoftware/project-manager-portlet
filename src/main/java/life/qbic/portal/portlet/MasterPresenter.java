@@ -8,8 +8,7 @@ import life.qbic.portal.portlet.module.projectOverviewModule.ProjectOVPresenter;
 import life.qbic.portal.portlet.module.projectSheetModule.ProjectSheetPresenter;
 import life.qbic.portal.portlet.module.projectsStatsModule.ProjectsStatsPresenter;
 import life.qbic.portal.portlet.module.timelineChartModule.TimelineChartPresenter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import life.qbic.portal.portlet.project.ProjectContentModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,6 +27,7 @@ public class MasterPresenter {
   private final OverviewChartPresenter overviewChartPresenter;
   private final ProjectsStatsPresenter projectsStatsPresenter;
   private final TimelineChartPresenter timelineChartPresenter;
+  private final ProjectContentModel contentModel;
 
   MasterPresenter(ProjectOVPresenter projectOverviewPresenter,
       ProjectSheetPresenter projectSheetPresenter,
@@ -35,7 +35,7 @@ public class MasterPresenter {
       ProjectFilter projectFilter,
       OverviewChartPresenter overviewChartPresenter,
       ProjectsStatsPresenter projectsStatsPresenter,
-      TimelineChartPresenter timelineChartPresenter) {
+      TimelineChartPresenter timelineChartPresenter, ProjectContentModel contentModel) {
     this.projectOverviewPresenter = projectOverviewPresenter;
     this.projectFollowerPresenter = projectFollowerPresenter;
     this.projectSheetPresenter = projectSheetPresenter;
@@ -43,6 +43,7 @@ public class MasterPresenter {
     this.overviewChartPresenter = overviewChartPresenter;
     this.projectsStatsPresenter = projectsStatsPresenter;
     this.timelineChartPresenter = timelineChartPresenter;
+    this.contentModel = contentModel;
     init();
   }
 
@@ -67,6 +68,7 @@ public class MasterPresenter {
 
     if (projectFollowerPresenter.getFollowingProjects().size() > 0) {
       makeFilter();
+      projectOverviewPresenter.setExportButton(contentModel.exportProjects());
       overviewChartPresenter.update();
       timelineChartPresenter.update();
       projectsStatsPresenter.update();
@@ -82,6 +84,7 @@ public class MasterPresenter {
     projectsStatsPresenter.update();
     if (projectFollowerPresenter.getFollowingProjects().size() == 0) {
       projectSheetPresenter.getProjectSheetView().getProjectSheet().setVisible(false);
+      projectOverviewPresenter.setExportButton(contentModel.exportProjects());
     } else {
       projectSheetPresenter.getProjectSheetView().getProjectSheet().setVisible(true);
     }

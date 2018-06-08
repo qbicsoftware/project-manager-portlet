@@ -86,6 +86,12 @@
       <artifactId>switch</artifactId>
       <version>3.0.0</version>
     </dependency>
+    <!-- Container exporter-->
+    <dependency>
+      <groupId>org.vaadin.addons</groupId>
+      <artifactId>exporter</artifactId>
+      <version>0.0.7</version>
+    </dependency>
     <dependency>
       <groupId>org.vaadin.addons</groupId>
       <artifactId>vaadin-grid-util</artifactId>
