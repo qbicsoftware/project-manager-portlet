@@ -24,6 +24,7 @@ public class UserManagementDB {
 
   public UserManagementDB(String userName, String password) {
     Properties connectionProps = new Properties();
+    System.out.println(userName + password);
     connectionProps.put("user", userName);
     connectionProps.put("password", password);
 

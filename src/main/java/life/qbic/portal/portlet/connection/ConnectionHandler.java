@@ -84,17 +84,16 @@ public class ConnectionHandler {
   }
 
   public void setCredentials() {
-    if (PortalUtils.isLiferayPortlet()) {
-      LOG.info("Liferay-Portlet found. Connect to Openbis");
+    LOG.info("Set credentials");
+    try {
       mysqlUser = conf.getMysqlUser();
       mysqlPW = conf.getMysqlPass();
       openBisUser = conf.getDataSourceUser();
       openBisPw = conf.getDataSourcePassword();
-    } else {
+      LOG.info(mysqlUser, openBisUser);
+    } catch (Exception e) {
       LOG.info("No Liferay Portlet found. Get user and passwords from local file.");
-      Notification notif = new Notification("No liferay portlet!", Type.ERROR_MESSAGE);
-      notif.setDelayMsec(500000000);
-      notif.show(Page.getCurrent());
+
       getCredentials(propertyFilePath);
     }
   }
