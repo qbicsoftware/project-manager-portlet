@@ -72,9 +72,7 @@ public class ConnectionHandler {
 
     } catch (Exception e) {
         LOG.error("Connection to openBIS failed.");
-      Notification notif = new Notification("Connection to openbis failed!", Type.ERROR_MESSAGE);
-      notif.setDelayMsec(500000000);
-      notif.show(Page.getCurrent());
+      e.printStackTrace();
       }
 
     return openBisConnection;
@@ -87,7 +85,6 @@ public class ConnectionHandler {
       mysqlPW = conf.getMysqlPass();
       openBisUser = conf.getDataSourceUser();
       openBisPw = conf.getDataSourcePassword();
-      LOG.info(mysqlUser + " " + openBisUser);
       if (mysqlUser == null || openBisUser == null) {
         throw new Exception();
       }
