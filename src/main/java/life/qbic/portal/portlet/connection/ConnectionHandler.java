@@ -43,7 +43,6 @@ public class ConnectionHandler {
     }
 
     openBisConnection = connectToOpenBis();
-
   }
 
   public OpenBisConnection connectToOpenBis() {
@@ -62,13 +61,8 @@ public class ConnectionHandler {
 
       String sessionToken = "";
 
-      if (PortalUtils.isLiferayPortlet()) {
-        // login to obtain a session token
-        sessionToken = app.login(conf.getDataSourceUser(), conf.getDataSourcePassword());
-      } else {
-        sessionToken = app.login(openBisUser, openBisPw);
-      }
-
+      LOG.info("Connect user " + openBisUser + " to openbis.");
+      sessionToken = app.login(openBisUser, openBisPw);
       openBisConnection = new OpenBisConnection(app, dss, sessionToken);
       LOG.info("Connection to openBIS established.");
 
@@ -82,6 +76,7 @@ public class ConnectionHandler {
 
   public void setCredentials() {
     if (PortalUtils.isLiferayPortlet()) {
+      LOG.info("Liferay-Portlet found. Connect to Openbis");
       mysqlUser = conf.getMysqlUser();
       mysqlPW = conf.getMysqlPass();
       openBisUser = conf.getDataSourceUser();
