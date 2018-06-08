@@ -28,7 +28,7 @@ public class UserManagementDB {
     connectionProps.put("password", password);
 
     try {
-      Class.forName("com.mysql.jdbc.Driver");
+      //Class.forName("com.mysql.jdbc.Driver");
       conn = DriverManager.getConnection(
           "jdbc:mysql://" + this.serverName + ":" + this.portNumber + "/",
           connectionProps);
@@ -36,10 +36,11 @@ public class UserManagementDB {
     } catch (SQLException e) {
       LOG.error("Connection to user management DB failed. [SQLException]");
       e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-      LOG.error("Connection to user management DB failed. [ClassNotFoundException]");
-      e.printStackTrace();
     }
+    //catch (ClassNotFoundException e) {
+    //  LOG.error("Connection to user management DB failed. [ClassNotFoundException]");
+    //  e.printStackTrace();
+    //}
   }
 
 
