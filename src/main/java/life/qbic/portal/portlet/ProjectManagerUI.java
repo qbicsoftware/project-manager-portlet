@@ -149,14 +149,6 @@ public class ProjectManagerUI extends QBiCPortletUI {
         .animationDuration(100).zIndex(1).build();
     VerticalLayout sliderFrame = new VerticalLayout();
     sliderFrame.addComponent(sliderPanel);
-    UI.getCurrent().addClickListener((MouseEvents.ClickListener) event -> {
-      if (sliderPanel.isExpanded()) {
-        sliderPanel.collapse();
-      }
-      projectOVPresenter.getSelectedProject().setValue(null);
-      projectOVPresenter.clearSelection();
-      projectSheetView.reset();
-    });
     sliderFrame.setComponentAlignment(sliderPanel, Alignment.MIDDLE_CENTER);
     sliderFrame.setSizeFull();
 
