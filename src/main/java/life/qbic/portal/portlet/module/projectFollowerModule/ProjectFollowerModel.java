@@ -2,6 +2,8 @@ package life.qbic.portal.portlet.module.projectFollowerModule;
 
 import com.vaadin.data.util.sqlcontainer.connection.JDBCConnectionPool;
 import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
+import com.vaadin.server.Page;
+import com.vaadin.ui.UI;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,6 +76,11 @@ public class ProjectFollowerModel {
         .makeFreeFormQuery(QuerryType.FOLLOW_PROJECT, querySettings, primaryKey);
 
     exectuteStatement(query.getQueryString());
+
+    if (allFollowingProjects.size() == 1) {
+      UI.getCurrent().push();
+    }
+
   }
 
 

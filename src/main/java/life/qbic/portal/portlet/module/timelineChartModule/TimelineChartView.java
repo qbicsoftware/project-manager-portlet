@@ -83,7 +83,6 @@ public class TimelineChartView extends Chart {
 
     this.setImmediate(true);
     drawChart(conf);
-
   }
 
   @Override

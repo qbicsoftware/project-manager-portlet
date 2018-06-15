@@ -72,6 +72,17 @@ public class MasterPresenter {
       overviewChartPresenter.update();
       timelineChartPresenter.update();
       projectsStatsPresenter.update();
+      overviewChartPresenter.getChart().setVisible(true);
+      timelineChartPresenter.getChart().setVisible(true);
+      try {
+        projectOverviewPresenter.setExportButton(contentModel.exportProjects());
+        projectOverviewPresenter.refreshView();
+      } catch (Exception e) {
+        LOG.error("No summary possible.");
+      }
+    } else {
+      overviewChartPresenter.getChart().setVisible(false);
+      timelineChartPresenter.getChart().setVisible(false);
     }
 
   }
@@ -79,17 +90,21 @@ public class MasterPresenter {
   private void refreshModuleViews(Property.ValueChangeEvent event) {
     makeFilter();
     projectOverviewPresenter.refreshView();
+    projectsStatsPresenter.update();
     if (contentModel.getFollowingProjects().size() > 0) {
       overviewChartPresenter.update();
+      overviewChartPresenter.getChart().setVisible(true);
       timelineChartPresenter.update();
-      projectsStatsPresenter.update();
-      //projectOverviewPresenter.renderTable();
-    }
-    if (projectFollowerPresenter.getFollowingProjects().size() == 0) {
-      projectSheetPresenter.getProjectSheetView().getProjectSheet().setVisible(false);
-      projectOverviewPresenter.setExportButton(contentModel.exportProjects());
+      timelineChartPresenter.getChart().setVisible(true);
     } else {
-      projectSheetPresenter.getProjectSheetView().getProjectSheet().setVisible(true);
+      overviewChartPresenter.getChart().setVisible(false);
+      timelineChartPresenter.getChart().setVisible(false);
+    }
+
+    try {
+      projectOverviewPresenter.setExportButton(contentModel.exportProjects());
+    } catch (Exception e) {
+      LOG.error("No summary possible.");
     }
     LOG.info("Refreshed views.");
   }
