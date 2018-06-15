@@ -183,6 +183,8 @@ public class ProjectManagerUI extends QBiCPortletUI {
     final MasterPresenter masterPresenter = new MasterPresenter(projectOVPresenter,
         projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter, projectsStatsPresenter, timelineChartPresenter, model);
 
+    LOG.info("Project Manager initialized.");
+
     return mainFrame;
   }
 
