@@ -83,6 +83,7 @@ public class MasterPresenter {
       overviewChartPresenter.update();
       timelineChartPresenter.update();
       projectsStatsPresenter.update();
+      //projectOverviewPresenter.renderTable();
     }
     if (projectFollowerPresenter.getFollowingProjects().size() == 0) {
       projectSheetPresenter.getProjectSheetView().getProjectSheet().setVisible(false);

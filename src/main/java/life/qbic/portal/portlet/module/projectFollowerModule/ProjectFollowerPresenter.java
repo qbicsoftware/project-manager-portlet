@@ -103,7 +103,7 @@ public class ProjectFollowerPresenter {
           switchIsChangedFlag();
           LOG.info("Followed project " + selectedProject);
           if (model.getAllFollowingProjects().size() == 1) {
-            Page.getCurrent().reload();
+            //Page.getCurrent().reload();
           }
         } catch (Exception exp) {
           LOG.error("Could not follow project " + selectedProject);

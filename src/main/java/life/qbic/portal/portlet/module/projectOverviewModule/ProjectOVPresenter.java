@@ -135,7 +135,7 @@ public class ProjectOVPresenter {
   /**
    * Beautify the grid
    */
-  private void renderTable() {
+  public void renderTable() {
     overViewModule.getOverviewGrid().setSizeFull();
     overViewModule.columnList = overViewModule.getOverviewGrid().getColumns();
     overViewModule.getOverviewGrid().setResponsive(true);
@@ -241,12 +241,12 @@ public class ProjectOVPresenter {
     final GridCellFilter filter = new GridCellFilter(overViewModule.getOverviewGrid());
     configureFilter(filter);
 
-    overViewModule.getOverviewGrid().getColumn("rawDataRegistered").
-        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
-    overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
-        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
-    overViewModule.getOverviewGrid().getColumn("dataAnalyzedDate").
-        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
+//    overViewModule.getOverviewGrid().getColumn("rawDataRegistered").
+//        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
+//    overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
+//        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
+//    overViewModule.getOverviewGrid().getColumn("dataAnalyzedDate").
+//        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
 
     for (Column column : overViewModule.getOverviewGrid().getColumns()) {
       if (column.getHeaderCaption().equals("Principal Investigator") ||
