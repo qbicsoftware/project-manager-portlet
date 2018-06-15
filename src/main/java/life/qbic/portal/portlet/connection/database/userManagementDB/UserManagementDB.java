@@ -1,8 +1,5 @@
 package life.qbic.portal.portlet.connection.database.userManagementDB;
 
-import com.vaadin.server.Page;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Notification.Type;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,7 +8,6 @@ import java.sql.Statement;
 import java.util.Properties;
 import life.qbic.portal.Styles;
 import life.qbic.portal.Styles.NotificationType;
-import life.qbic.portal.portlet.ProjectManagerUI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -162,7 +158,7 @@ public class UserManagementDB {
   public String getOfferID(String projectCode) {
     Statement stmt = null;
     String offerID = "";
-    String query = "SELECT id " +
+    String query = "SELECT offer_id " +
         "FROM " + "facs_facility" + ".offers" +
         " WHERE " + "offer_project_reference" + " LIKE " + "'%" + projectCode + "%'";
     try {
@@ -171,8 +167,10 @@ public class UserManagementDB {
       while (rs.next()) {
         offerID = rs.getString("offer_number");
       }
-    } catch (Exception e) {
-      LOG.info("No offer found for project " + projectCode + " in the facs facility DB.");
+    } catch (NullPointerException e) {
+      //nothing
+    } catch (Exception e)  {
+      e.printStackTrace();
     } finally {
       if (stmt != null) {
         try {

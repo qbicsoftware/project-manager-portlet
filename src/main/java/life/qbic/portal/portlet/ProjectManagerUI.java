@@ -61,6 +61,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     ConnectionHandler connectionHandler = new ConnectionHandler(projectFilter);
 
     // Init Project Follower (Slider)
+    LOG.info("Init Project Follower");
     ProjectFollowerModel followerModel = new ProjectFollowerModel(
         connectionHandler.getProjectDatabase());
     ProjectFollowerView followerView = new ProjectFollowerViewImpl()
@@ -78,11 +79,13 @@ public class ProjectManagerUI extends QBiCPortletUI {
     }
 
     // Init Project Content (Database)
+    LOG.info("Init Project Content");
     ProjectContentModel model = new ProjectContentModel(connectionHandler.getProjectDatabase(),
         connectionHandler.getUserManagementDB(),
         followerModel.getAllFollowingProjects(), connectionHandler.getOpenBisConnection());
 
     // Init Project Overview (Table)
+    LOG.info("Init Project Overview Table");
     ProjectOverviewModule projectOverviewModule = new ProjectOverviewModule();
     OverviewChartView overviewChartView = new OverviewChartView();
     OverviewChartPresenter overviewChartPresenter = new OverviewChartPresenter(model,
@@ -92,20 +95,24 @@ public class ProjectManagerUI extends QBiCPortletUI {
         connectionHandler.getProjectDatabase());
 
     // Init Project Sheet (Project Information)
+    LOG.info("Init Project Information");
     ProjectSheetView projectSheetView = new ProjectSheetViewImplementation();
     ProjectSheetPresenter projectSheetPresenter = new ProjectSheetPresenter(projectSheetView);
     ProjectsStatsView projectsStatsView = new ProjectsStatsViewImpl();
 
     // Init Time Line Chart
+    LOG.info("Init Time Line Chart");
     TimelineChartView timelineChartView = new TimelineChartView();
     TimelineChartPresenter timelineChartPresenter = new TimelineChartPresenter(model,
         timelineChartView);
 
     //Init project stats
+    LOG.info("Init Project Statistics");
     ProjectsStatsPresenter projectsStatsPresenter = new ProjectsStatsPresenter(model,
         projectsStatsView);
 
     // Init unfollow button
+    LOG.info("Init Buttons");
     projectOVPresenter.getUnfollowButton().addClickListener(event -> {
       try {
         String id = projectOVPresenter.getSelectedProject().getValue();
@@ -133,6 +140,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     });
 
     // Init slider
+    LOG.info("Init Slider");
     SliderPanel sliderPanel = new SliderPanelBuilder(followerView.getUI())
         .caption("FOLLOW PROJECTS")
         .mode(SliderMode.TOP)
@@ -153,6 +161,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     sliderFrame.setSizeFull();
 
     // Init combined Layouts
+    LOG.info("Create final Layout");
     VerticalLayout mainContent = new VerticalLayout();
     VerticalLayout mainFrame = new VerticalLayout();
     HorizontalLayout statisticsLayout = new HorizontalLayout();
