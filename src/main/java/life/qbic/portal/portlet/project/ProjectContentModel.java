@@ -267,72 +267,83 @@ public class ProjectContentModel {
 
   public Button exportProjects() {
     Button exportButton = new Button();
-    Collection<?> itemIds = tableContent.getItemIds();
-    String fileName = "project_overview";
     try {
-      File projectFile = File.createTempFile(fileName, ".csv");
-      FileWriter fw = new FileWriter(projectFile);
-      BufferedWriter bw = new BufferedWriter(fw);
-      String header = "Project,Status,Progress,PI,Species,Samples,Sample Types,Project Registered,Raw Data Registered,Data Analyzed,Offer ID,Invoice\n";
-      bw.write(header);
-      for (Object itemId : itemIds) {
-        String projectName = tableContent.getContainerProperty(itemId, "projectID").getValue()
-            .toString();
-        String projectTime = tableContent.getContainerProperty(itemId, "projectTime").getValue()
-            .toString();
-        String projectStatus = tableContent.getContainerProperty(itemId, "projectStatus").getValue()
-            .toString();
-        String projectPI = tableContent.getContainerProperty(itemId, "investigatorName").getValue()
-            .toString();
-        String species = tableContent.getContainerProperty(itemId, "species").getValue().toString();
-        String samples = tableContent.getContainerProperty(itemId, "samples").getValue().toString();
-        String sampleType = tableContent.getContainerProperty(itemId, "sampleTypes").getValue()
-            .toString();
-        String projectRegisteredDate = tableContent
-            .getContainerProperty(itemId, "projectRegisteredDate").getValue().toString();
+      Collection<?> itemIds = tableContent.getItemIds();
+      String fileName = "project_overview";
+      try {
+        File projectFile = File.createTempFile(fileName, ".csv");
+        FileWriter fw = new FileWriter(projectFile);
+        BufferedWriter bw = new BufferedWriter(fw);
+        String header = "Project,Status,Progress,PI,Species,Samples,Sample Types,Project Registered,Raw Data Registered,Data Analyzed,Offer ID,Invoice\n";
+        bw.write(header);
+        for (Object itemId : itemIds) {
+          String projectName = tableContent.getContainerProperty(itemId, "projectID").getValue()
+              .toString();
+          String projectTime = tableContent.getContainerProperty(itemId, "projectTime").getValue()
+              .toString();
+          String projectStatus = tableContent.getContainerProperty(itemId, "projectStatus")
+              .getValue()
+              .toString();
+          String projectPI = tableContent.getContainerProperty(itemId, "investigatorName")
+              .getValue()
+              .toString();
+          String species = tableContent.getContainerProperty(itemId, "species").getValue()
+              .toString();
+          String samples = tableContent.getContainerProperty(itemId, "samples").getValue()
+              .toString();
+          String sampleType = tableContent.getContainerProperty(itemId, "sampleTypes").getValue()
+              .toString();
+          String projectRegisteredDate = tableContent
+              .getContainerProperty(itemId, "projectRegisteredDate").getValue().toString();
 
-        String rawDataRegisteredDate = "";
-        try {   rawDataRegisteredDate = tableContent
-              .getContainerProperty(itemId, "rawDataRegistered").getValue().toString();
-        } catch (NullPointerException e) {
-          rawDataRegisteredDate = "";
+          String rawDataRegisteredDate = "";
+          try {
+            rawDataRegisteredDate = tableContent
+                .getContainerProperty(itemId, "rawDataRegistered").getValue().toString();
+          } catch (NullPointerException e) {
+            rawDataRegisteredDate = "";
+          }
+          String dataAnalyzedDate = "";
+          try {
+            dataAnalyzedDate = tableContent.getContainerProperty(itemId, "dataAnalyzedDate")
+                .getValue().toString();
+          } catch (NullPointerException e) {
+            dataAnalyzedDate = "";
+          }
+          String offerID = "";
+          try {
+            offerID = tableContent.getContainerProperty(itemId, "offerID")
+                .getValue().toString();
+          } catch (NullPointerException e) {
+            offerID = "";
+          }
+          String invoice = "";
+          try {
+            invoice = tableContent.getContainerProperty(itemId, "invoice")
+                .getValue().toString();
+          } catch (NullPointerException e) {
+            invoice = "";
+          }
+          bw.write(
+              projectName + "," + projectTime + "," + projectStatus + "," + projectPI + ","
+                  + species
+                  + "," + samples + "," + sampleType + "," + projectRegisteredDate + ","
+                  + rawDataRegisteredDate + "," + dataAnalyzedDate + "," + offerID + "," + invoice
+                  + "\n");
         }
-        String dataAnalyzedDate = "";
-        try {
-           dataAnalyzedDate = tableContent.getContainerProperty(itemId, "dataAnalyzedDate")
-              .getValue().toString();
-        } catch (NullPointerException e) {
-          dataAnalyzedDate = "";
-        }
-        String offerID = "";
-        try {
-          offerID = tableContent.getContainerProperty(itemId, "offerID")
-              .getValue().toString();
-        } catch (NullPointerException e) {
-          offerID = "";
-        }
-        String invoice = "";
-        try {
-          invoice = tableContent.getContainerProperty(itemId, "invoice")
-              .getValue().toString();
-        } catch (NullPointerException e) {
-          invoice = "";
-        }
-        bw.write(
-            projectName + "," + projectTime + "," + projectStatus + "," + projectPI + "," + species
-                + "," + samples + "," + sampleType + "," + projectRegisteredDate + ","
-                + rawDataRegisteredDate + "," + dataAnalyzedDate + "," + offerID + "," + invoice + "\n");
-      }
-      bw.close();
-      fw.close();
-      FileResource res = new FileResource(projectFile);
-      FileDownloader fd = new FileDownloader(res);
-      exportButton = new Button("Summary");
-      exportButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
-      fd.extend(exportButton);
+        bw.close();
+        fw.close();
+        FileResource res = new FileResource(projectFile);
+        FileDownloader fd = new FileDownloader(res);
+        exportButton = new Button("Summary");
+        exportButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
+        fd.extend(exportButton);
       } catch (IOException e) {
         e.printStackTrace();
       }
+    } catch (StringIndexOutOfBoundsException e) {
+      exportButton = new Button("Summary");
+    }
 
       return exportButton;
     }

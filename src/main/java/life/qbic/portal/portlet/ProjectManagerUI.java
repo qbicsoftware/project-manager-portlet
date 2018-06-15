@@ -197,4 +197,6 @@ public class ProjectManagerUI extends QBiCPortletUI {
     return mainFrame;
   }
 
+
+
 }

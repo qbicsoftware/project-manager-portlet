@@ -79,9 +79,11 @@ public class MasterPresenter {
   private void refreshModuleViews(Property.ValueChangeEvent event) {
     makeFilter();
     projectOverviewPresenter.refreshView();
-    overviewChartPresenter.update();
-    timelineChartPresenter.update();
-    projectsStatsPresenter.update();
+    if (contentModel.getFollowingProjects().size() > 0) {
+      overviewChartPresenter.update();
+      timelineChartPresenter.update();
+      projectsStatsPresenter.update();
+    }
     if (projectFollowerPresenter.getFollowingProjects().size() == 0) {
       projectSheetPresenter.getProjectSheetView().getProjectSheet().setVisible(false);
       projectOverviewPresenter.setExportButton(contentModel.exportProjects());
