@@ -7,10 +7,14 @@ import com.vaadin.addon.charts.model.Configuration;
 import com.vaadin.addon.charts.model.Cursor;
 import com.vaadin.addon.charts.model.DataSeries;
 import com.vaadin.addon.charts.model.PlotOptionsColumnrange;
+import com.vaadin.addon.charts.model.RangeSelector;
 import com.vaadin.addon.charts.model.Tooltip;
 import com.vaadin.addon.charts.model.XAxis;
 import com.vaadin.addon.charts.model.YAxis;
+import com.vaadin.addon.charts.model.style.ButtonTheme;
+import com.vaadin.addon.charts.model.style.FontWeight;
 import com.vaadin.addon.charts.model.style.SolidColor;
+import com.vaadin.addon.charts.model.style.Style;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -81,7 +85,7 @@ public class TimelineChartView extends Chart {
     conf.addSeries(overdueSeries);
     conf.addSeries(intimeSeries);
 
-    this.setImmediate(true);
+    setImmediate(true);
     drawChart(conf);
   }
 
