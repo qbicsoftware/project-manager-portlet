@@ -6,6 +6,7 @@ import com.vaadin.addon.charts.PointClickEvent;
 import com.vaadin.addon.charts.model.ChartType;
 import com.vaadin.addon.charts.model.Configuration;
 import com.vaadin.addon.charts.model.Cursor;
+import com.vaadin.addon.charts.model.DataLabels;
 import com.vaadin.addon.charts.model.DataSeries;
 import com.vaadin.addon.charts.model.PlotOptionsPie;
 import com.vaadin.addon.charts.model.style.SolidColor;
@@ -23,7 +24,12 @@ public class OverviewChartView extends Chart {
     conf = this.getConfiguration();
     series = new DataSeries();
 
+    DataLabels dataLabels = new DataLabels();
+    dataLabels.setEnabled(true);
+    dataLabels
+        .setFormatter("'<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %'");
     plotOptions = new PlotOptionsPie();
+    plotOptions.setDataLabels(dataLabels);
     plotOptions.setShowInLegend(true);
     // unregistered - in time - overdue
     this.setHeight("300px");
