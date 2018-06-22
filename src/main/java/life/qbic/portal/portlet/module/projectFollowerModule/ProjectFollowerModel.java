@@ -76,11 +76,6 @@ public class ProjectFollowerModel {
         .makeFreeFormQuery(QuerryType.FOLLOW_PROJECT, querySettings, primaryKey);
 
     exectuteStatement(query.getQueryString());
-
-    if (allFollowingProjects.size() == 1) {
-      UI.getCurrent().push();
-    }
-
   }
 
 
