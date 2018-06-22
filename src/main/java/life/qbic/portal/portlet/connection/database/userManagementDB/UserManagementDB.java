@@ -169,7 +169,7 @@ public class UserManagementDB {
       }
     } catch (NullPointerException e) {
       //nothing
-    } catch (Exception e)  {
+    } catch (Exception e) {
       e.printStackTrace();
     } finally {
       if (stmt != null) {

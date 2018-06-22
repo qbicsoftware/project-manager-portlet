@@ -2,13 +2,11 @@ package life.qbic.portal.portlet.module.projectFollowerModule;
 
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.ObjectProperty;
-import com.vaadin.server.Page;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import life.qbic.portal.portlet.ProjectManagerUI;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.WrongArgumentSettingsException;
 import life.qbic.portal.portlet.connection.openbis.OpenBisConnection;
 import life.qbic.portal.portlet.project.ProjectBean;
@@ -21,6 +19,7 @@ import org.vaadin.teemu.switchui.Switch;
  */
 public class ProjectFollowerPresenter {
 
+  private static final Logger LOG = LogManager.getLogger(ProjectFollowerPresenter.class);
   private final ProjectFollowerView view;
   private final ProjectFollowerModel model;
   private final OpenBisConnection connection;
@@ -31,8 +30,6 @@ public class ProjectFollowerPresenter {
   private List<String> followingProjects;
   private String currentProject;
   private ObjectProperty<Boolean> isChangedFlag;
-
-  private static final Logger LOG = LogManager.getLogger(ProjectFollowerPresenter.class);
 
   public ProjectFollowerPresenter(ProjectFollowerView view, ProjectFollowerModel model,
       OpenBisConnection openBisConnection) {

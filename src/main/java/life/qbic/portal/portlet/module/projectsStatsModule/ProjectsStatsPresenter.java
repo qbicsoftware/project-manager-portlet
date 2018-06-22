@@ -1,7 +1,6 @@
 package life.qbic.portal.portlet.module.projectsStatsModule;
 
 import java.util.List;
-import life.qbic.portal.portlet.ProjectManagerUI;
 import life.qbic.portal.portlet.project.ProjectContentModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,11 +10,11 @@ import org.apache.logging.log4j.Logger;
  */
 public class ProjectsStatsPresenter {
 
+  private static final Logger LOG = LogManager.getLogger(ProjectsStatsPresenter.class);
   private ProjectContentModel model;
   private ProjectsStatsView view;
   private List<String> projects;
   private Integer overdueProjects, unregisteredProjects, intimeProjects;
-  private static final Logger LOG = LogManager.getLogger(ProjectsStatsPresenter.class);
 
   public ProjectsStatsPresenter(ProjectContentModel model, ProjectsStatsView view) {
     this.model = model;
@@ -26,11 +25,11 @@ public class ProjectsStatsPresenter {
   public void update() {
     projects = model.getFollowingProjects();
     if (projects.size() > 0) {
-      LOG.info("Projects: " +projects.size());
+      LOG.info("Projects: " + projects.size());
       overdueProjects = model.getOverdueProjects();
       LOG.info("Overdue: " + overdueProjects);
       unregisteredProjects = model.getUnregisteredProjects();
-      LOG.info("Unregistered: " +unregisteredProjects);
+      LOG.info("Unregistered: " + unregisteredProjects);
       intimeProjects = model.getInTimeProjects();
       LOG.info("In Time: " + intimeProjects);
     } else {

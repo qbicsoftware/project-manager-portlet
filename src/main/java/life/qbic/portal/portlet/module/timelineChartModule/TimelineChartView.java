@@ -81,7 +81,7 @@ public class TimelineChartView extends Chart {
     conf.addSeries(overdueSeries);
     conf.addSeries(intimeSeries);
 
-    this.setImmediate(true);
+    setImmediate(true);
     drawChart(conf);
   }
 

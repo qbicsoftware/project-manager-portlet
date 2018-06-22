@@ -62,9 +62,9 @@ public class ConnectionHandler {
       LOG.info("Connection to openBIS established.");
 
     } catch (Exception e) {
-        LOG.error("Connection to openBIS failed.");
+      LOG.error("Connection to openBIS failed.");
       e.printStackTrace();
-      }
+    }
 
     return openBisConnection;
   }

@@ -8,5 +8,5 @@ public class WrongArgumentSettingsException extends Exception {
   public WrongArgumentSettingsException(String s) {
     super(s);
   }
-  
+
 }

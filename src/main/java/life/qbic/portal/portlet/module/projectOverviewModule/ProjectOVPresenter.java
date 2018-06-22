@@ -16,7 +16,6 @@ import com.vaadin.ui.Field;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.renderers.DateRenderer;
 import com.vaadin.ui.renderers.HtmlRenderer;
 import com.vaadin.ui.themes.ValoTheme;
 import java.sql.Connection;
@@ -109,7 +108,9 @@ public class ProjectOVPresenter {
 
       overViewModule.getOverviewGrid().addItemClickListener(event -> {
         this.selectedProjectItem = event.getItem();
-        this.selectedProject.setValue((String) event.getItem().getItemProperty(TableColumns.PROJECTOVERVIEWTABLE.get(ColumnTypes.PROJECTID)).getValue());
+        this.selectedProject.setValue((String) event.getItem()
+            .getItemProperty(TableColumns.PROJECTOVERVIEWTABLE.get(ColumnTypes.PROJECTID))
+            .getValue());
       });
     }
 
@@ -128,7 +129,7 @@ public class ProjectOVPresenter {
       setFilter("projectTime", overviewChartPresenter.getChart().getDataSeriesObject(event));
     });
 
-    exportButton=contentModel.exportProjects();
+    exportButton = contentModel.exportProjects();
 
   }
 
@@ -382,7 +383,7 @@ public class ProjectOVPresenter {
     try {
       // First, refresh the model (new SQL query!)
       this.contentModel.refresh();
-      exportButton=contentModel.exportProjects();
+      exportButton = contentModel.exportProjects();
 
       int timer = 0;
 

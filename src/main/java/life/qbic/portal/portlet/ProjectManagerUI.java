@@ -2,13 +2,11 @@ package life.qbic.portal.portlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
-import com.vaadin.event.MouseEvents;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Layout;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import java.sql.SQLException;
@@ -123,7 +121,8 @@ public class ProjectManagerUI extends QBiCPortletUI {
         projectOverviewModule.getOverviewGrid().deselectAll();
         projectSheetView.reset();
       } catch (SQLException | WrongArgumentSettingsException | NullPointerException e) {
-        LOG.error("Could not unfollow project with ID:" +  projectOVPresenter.getSelectedProject().getValue());
+        LOG.error("Could not unfollow project with ID:" + projectOVPresenter.getSelectedProject()
+            .getValue());
         e.printStackTrace();
       }
     });
@@ -182,13 +181,13 @@ public class ProjectManagerUI extends QBiCPortletUI {
 
     // Init Master Presenter
     final MasterPresenter masterPresenter = new MasterPresenter(projectOVPresenter,
-        projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter, projectsStatsPresenter, timelineChartPresenter, model);
+        projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter,
+        projectsStatsPresenter, timelineChartPresenter, model);
 
     LOG.info("Project Manager initialized.");
 
     return mainFrame;
   }
-
 
 
 }

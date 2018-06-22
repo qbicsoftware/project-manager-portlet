@@ -12,7 +12,6 @@ import ch.ethz.sis.openbis.generic.asapi.v3.dto.sample.search.SampleSearchCriter
 import ch.ethz.sis.openbis.generic.asapi.v3.dto.vocabulary.VocabularyTerm;
 import ch.ethz.sis.openbis.generic.asapi.v3.dto.vocabulary.fetchoptions.VocabularyTermFetchOptions;
 import ch.ethz.sis.openbis.generic.asapi.v3.dto.vocabulary.search.VocabularyTermSearchCriteria;
-import ch.ethz.sis.openbis.generic.dssapi.v3.IDataStoreServerApi;
 import com.vaadin.data.util.BeanItemContainer;
 import java.util.ArrayList;
 import java.util.Collections;

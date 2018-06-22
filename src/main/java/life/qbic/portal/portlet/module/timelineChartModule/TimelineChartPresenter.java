@@ -30,7 +30,7 @@ public class TimelineChartPresenter {
   }
 
   public void update() {
-    for (String category : view.getConf().getxAxis().getCategories()){
+    for (String category : view.getConf().getxAxis().getCategories()) {
       view.getConf().getxAxis().removeCategory(category);
     }
     SQLContainer tableContent = model.getTableContent();
