@@ -1,21 +1,20 @@
 package life.qbic.portal.portlet.connection;
 
 import ch.ethz.sis.openbis.generic.asapi.v3.IApplicationServerApi;
-import ch.ethz.sis.openbis.generic.dssapi.v3.IDataStoreServerApi;
 import ch.systemsx.cisd.common.spring.HttpInvokerUtils;
+import com.vaadin.server.Page;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Properties;
-import life.qbic.portal.portlet.ProjectManagerUI;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.ProjectDatabase;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.ProjectFilter;
 import life.qbic.portal.portlet.connection.database.userManagementDB.UserManagementDB;
 import life.qbic.portal.portlet.connection.openbis.OpenBisConnection;
 import life.qbic.portal.utils.ConfigurationManager;
 import life.qbic.portal.utils.ConfigurationManagerFactory;
-import life.qbic.portal.utils.PortalUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,21 +38,16 @@ public class ConnectionHandler {
       LOG.info("Connection to project DB established.");
     } catch (Exception e) {
       LOG.info("Connection to project DB failed.");
-      e.printStackTrace();
+      Notification notif = new Notification("Connection to projectDB failed!", Type.ERROR_MESSAGE);
+      notif.setDelayMsec(500000000);
+      notif.show(Page.getCurrent());
     }
 
     openBisConnection = connectToOpenBis();
-
   }
 
   public OpenBisConnection connectToOpenBis() {
     try {
-
-      // Connect to openbis
-      IDataStoreServerApi dss =
-          HttpInvokerUtils.createStreamSupportingServiceStub(IDataStoreServerApi.class,
-              "https://qbis.qbic.uni-tuebingen.de:444/datastore_server"
-                  + IDataStoreServerApi.SERVICE_URL, 10000);
 
       // get a reference to AS API
       IApplicationServerApi app = HttpInvokerUtils.createServiceStub(IApplicationServerApi.class,
@@ -62,31 +56,30 @@ public class ConnectionHandler {
 
       String sessionToken = "";
 
-      if (PortalUtils.isLiferayPortlet()) {
-        // login to obtain a session token
-        sessionToken = app.login(conf.getDataSourceUser(), conf.getDataSourcePassword());
-      } else {
-        sessionToken = app.login(openBisUser, openBisPw);
-      }
-
-      openBisConnection = new OpenBisConnection(app, dss, sessionToken);
+      LOG.info("Connect user " + openBisUser + " to openbis.");
+      sessionToken = app.login(openBisUser, openBisPw);
+      openBisConnection = new OpenBisConnection(app, sessionToken);
       LOG.info("Connection to openBIS established.");
 
     } catch (Exception e) {
         LOG.error("Connection to openBIS failed.");
-        e.printStackTrace();
+      e.printStackTrace();
       }
 
     return openBisConnection;
   }
 
   public void setCredentials() {
-    if (PortalUtils.isLiferayPortlet()) {
+    LOG.info("Set credentials");
+    try {
       mysqlUser = conf.getMysqlUser();
       mysqlPW = conf.getMysqlPass();
       openBisUser = conf.getDataSourceUser();
       openBisPw = conf.getDataSourcePassword();
-    } else {
+      if (mysqlUser == null || openBisUser == null) {
+        throw new Exception();
+      }
+    } catch (Exception e) {
       LOG.info("No Liferay Portlet found. Get user and passwords from local file.");
       getCredentials(propertyFilePath);
     }
@@ -111,13 +104,12 @@ public class ConnectionHandler {
 
     } catch (IOException ex) {
       LOG.error("Could not find the property file. ");
-      ex.printStackTrace();
     } finally {
       if (input != null) {
         try {
           input.close();
         } catch (IOException e) {
-          e.printStackTrace();
+          LOG.error("Could not find the property file");
         }
       }
     }

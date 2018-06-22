@@ -40,7 +40,6 @@ public class OverviewChartView extends Chart {
     conf.setSeries(series);
     this.setImmediate(true);
     this.drawChart(conf);
-
   }
 
   @Override

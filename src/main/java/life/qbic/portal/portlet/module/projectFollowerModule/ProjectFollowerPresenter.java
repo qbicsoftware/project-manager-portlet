@@ -2,6 +2,7 @@ package life.qbic.portal.portlet.module.projectFollowerModule;
 
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.ObjectProperty;
+import com.vaadin.server.Page;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,6 +102,9 @@ public class ProjectFollowerPresenter {
           refreshProjects();
           switchIsChangedFlag();
           LOG.info("Followed project " + selectedProject);
+          if (model.getAllFollowingProjects().size() == 1) {
+            //Page.getCurrent().reload();
+          }
         } catch (Exception exp) {
           LOG.error("Could not follow project " + selectedProject);
           exp.printStackTrace();

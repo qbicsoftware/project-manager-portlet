@@ -135,7 +135,7 @@ public class ProjectOVPresenter {
   /**
    * Beautify the grid
    */
-  private void renderTable() {
+  public void renderTable() {
     overViewModule.getOverviewGrid().setSizeFull();
     overViewModule.columnList = overViewModule.getOverviewGrid().getColumns();
     overViewModule.getOverviewGrid().setResponsive(true);
@@ -241,12 +241,19 @@ public class ProjectOVPresenter {
     final GridCellFilter filter = new GridCellFilter(overViewModule.getOverviewGrid());
     configureFilter(filter);
 
-    overViewModule.getOverviewGrid().getColumn("rawDataRegistered").
-        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
-    overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
-        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
-    overViewModule.getOverviewGrid().getColumn("dataAnalyzedDate").
-        setRenderer(new DateRenderer(new SimpleDateFormat("yyyy-MM-dd")));
+//    try {
+//      overViewModule.getOverviewGrid().getColumn("rawDataRegistered").
+//          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
+//              Locale.ENGLISH));
+//      overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
+//          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
+//              Locale.ENGLISH));
+//      overViewModule.getOverviewGrid().getColumn("dataAnalyzedDate").
+//          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
+//              Locale.ENGLISH));
+//    } catch (Exception e) {
+//      LOG.error("Problems rendering the grid dates.");
+//    }
 
     for (Column column : overViewModule.getOverviewGrid().getColumns()) {
       if (column.getHeaderCaption().equals("Principal Investigator") ||
@@ -279,9 +286,13 @@ public class ProjectOVPresenter {
     projectStatus.add("completed");
     filter.setComboBoxFilter("projectTime", projectTimeStatus);
     filter.setComboBoxFilter("projectStatus", projectStatus);
-    filter.setDateFilter("rawDataRegistered", new SimpleDateFormat("yyyy-MM-dd"), true);
-    filter.setDateFilter("projectRegisteredDate", new SimpleDateFormat("yyyy-MM-dd"), true);
-    filter.setDateFilter("dataAnalyzedDate", new SimpleDateFormat("yyyy-MM-dd"), true);
+    try {
+      filter.setDateFilter("rawDataRegistered", new SimpleDateFormat("yyyy-MM-dd"), true);
+      filter.setDateFilter("projectRegisteredDate", new SimpleDateFormat("yyyy-MM-dd"), true);
+      filter.setDateFilter("dataAnalyzedDate", new SimpleDateFormat("yyyy-MM-dd"), true);
+    } catch (Exception e) {
+      LOG.error("PROBLEM");
+    }
     filter.setTextFilter("offerID", true, false);
     filter.setTextFilter("investigatorName", true, false);
     filter.setTextFilter("species", true, false);
@@ -371,6 +382,7 @@ public class ProjectOVPresenter {
     try {
       // First, refresh the model (new SQL query!)
       this.contentModel.refresh();
+      exportButton=contentModel.exportProjects();
 
       int timer = 0;
 
@@ -409,7 +421,9 @@ public class ProjectOVPresenter {
         this.overViewModule.showGrid();
       }
 
+
     } catch (Exception exc) {
+      LOG.error("PROBLEM");
     }
   }
 

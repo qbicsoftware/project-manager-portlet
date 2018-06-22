@@ -33,13 +33,10 @@ public class OpenBisConnection {
       ProjectBean.class);
   private String sessionToken;
   private IApplicationServerApi app;
-  private IDataStoreServerApi dss;
 
-  public OpenBisConnection(IApplicationServerApi app, IDataStoreServerApi dss,
-      String sessionToken) {
+  public OpenBisConnection(IApplicationServerApi app, String sessionToken) {
 
     this.app = app;
-    this.dss = dss;
     this.sessionToken = sessionToken;
   }
 

@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.Properties;
 import life.qbic.portal.Styles;
 import life.qbic.portal.Styles.NotificationType;
-import life.qbic.portal.portlet.ProjectManagerUI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +16,7 @@ public class UserManagementDB {
   private static final Logger LOG = LogManager.getLogger(UserManagementDB.class);
   private String portNumber = "3306";
   private String serverName = "portal-testing.am10.uni-tuebingen.de";
+  private String connectionURI = "jdbc:mysql://portal-testing.am10.uni-tuebingen.de:3306/qbic_usermanagement_db";
   private Connection conn = null;
 
   public UserManagementDB(String userName, String password) {
@@ -25,12 +25,14 @@ public class UserManagementDB {
     connectionProps.put("password", password);
 
     try {
-      conn = DriverManager.getConnection(
-          "jdbc:mysql://" + this.serverName + ":" + this.portNumber + "/",
-          connectionProps);
+      Class.forName("com.mysql.jdbc.Driver");
+      conn = DriverManager.getConnection(connectionURI, userName, password);
       LOG.info("Connection to user management DB established.");
     } catch (SQLException e) {
-      LOG.error("Connection to user management DB failed.");
+      LOG.error("Connection to user management DB failed. [SQLException]");
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      LOG.error("Connection to user management DB failed. [ClassNotFoundException]");
       e.printStackTrace();
     }
   }
@@ -156,7 +158,7 @@ public class UserManagementDB {
   public String getOfferID(String projectCode) {
     Statement stmt = null;
     String offerID = "";
-    String query = "SELECT id " +
+    String query = "SELECT offer_id " +
         "FROM " + "facs_facility" + ".offers" +
         " WHERE " + "offer_project_reference" + " LIKE " + "'%" + projectCode + "%'";
     try {
@@ -165,8 +167,10 @@ public class UserManagementDB {
       while (rs.next()) {
         offerID = rs.getString("offer_number");
       }
-    } catch (Exception e) {
-      LOG.info("No offer found for project " + projectCode + " in the facs facility DB.");
+    } catch (NullPointerException e) {
+      //nothing
+    } catch (Exception e)  {
+      e.printStackTrace();
     } finally {
       if (stmt != null) {
         try {
