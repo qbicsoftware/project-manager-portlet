@@ -148,9 +148,11 @@ public class ProjectSheetPresenter {
     String projectSpecies = "Species," + currentItem.getItemProperty("species");
     String projectSamples = "Samples," + currentItem.getItemProperty("samples");
     String projectSampleTypes = "Sample Types," + currentItem.getItemProperty("sampleTypes");
-    String projectRegisteredDate ="Project Registered," + currentItem.getItemProperty("projectRegisteredDate");
-    String rawDataRegisteredDate ="Raw Data Registered," + currentItem.getItemProperty("rawDataRegistered");
-    String dataAnalyzedDate ="Data Analyzed," + currentItem.getItemProperty("dataAnalyzedDate");
+    String projectRegisteredDate =
+        "Project Registered," + currentItem.getItemProperty("projectRegisteredDate");
+    String rawDataRegisteredDate =
+        "Raw Data Registered," + currentItem.getItemProperty("rawDataRegistered");
+    String dataAnalyzedDate = "Data Analyzed," + currentItem.getItemProperty("dataAnalyzedDate");
 
     try {
       File projectFile = File.createTempFile(fileName, ".txt");

@@ -19,5 +19,5 @@
 
   <inherits name="org.vaadin.sliderpanel.WidgetSet"/>
 
-    <inherits name="org.vaadin.addons.WidgetSet" />
+  <inherits name="org.vaadin.addons.WidgetSet"/>
 </module>

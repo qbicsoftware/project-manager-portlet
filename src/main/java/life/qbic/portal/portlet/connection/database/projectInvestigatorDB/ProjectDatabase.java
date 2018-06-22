@@ -9,9 +9,6 @@ import com.vaadin.data.util.sqlcontainer.query.TableQuery;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import life.qbic.portal.portlet.ProjectManagerUI;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * Created by sven on 12/11/16.
@@ -34,7 +31,7 @@ public class ProjectDatabase implements ProjectDatabaseConnector {
   @Override
   public boolean connectToDatabase() throws SQLException {
     if (pool == null) {
-        pool = new SimpleJDBCConnectionPool(driverName, connectionURI, user, password);
+      pool = new SimpleJDBCConnectionPool(driverName, connectionURI, user, password);
       return true;
     }
     return false;

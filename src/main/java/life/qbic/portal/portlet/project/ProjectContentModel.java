@@ -21,7 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import javax.validation.constraints.Null;
 import life.qbic.portal.portlet.connection.database.projectInvestigatorDB.ProjectDatabaseConnector;
 import life.qbic.portal.portlet.connection.database.userManagementDB.UserManagementDB;
 import life.qbic.portal.portlet.connection.openbis.OpenBisConnection;
@@ -168,7 +167,8 @@ public class ProjectContentModel {
 
   private void writeSampleTypes(Object itemId, Project project) {
     String sampleTypes = String.join(",", openBisConnection.getSampleTypesOfProject(project));
-    tableContent.getContainerProperty(itemId, "sampleTypes").setValue(sampleTypes.replace(",", "/"));
+    tableContent.getContainerProperty(itemId, "sampleTypes")
+        .setValue(sampleTypes.replace(",", "/"));
   }
 
   public void writeProjectStatus() {
@@ -345,6 +345,6 @@ public class ProjectContentModel {
       exportButton = new Button("Summary");
     }
 
-      return exportButton;
-    }
+    return exportButton;
+  }
 }
