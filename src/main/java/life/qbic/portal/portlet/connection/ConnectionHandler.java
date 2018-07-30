@@ -2,6 +2,8 @@ package life.qbic.portal.portlet.connection;
 
 import ch.ethz.sis.openbis.generic.asapi.v3.IApplicationServerApi;
 import ch.systemsx.cisd.common.spring.HttpInvokerUtils;
+import com.liferay.portal.util.Portal;
+import com.liferay.portal.util.PortalUtil;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
@@ -15,6 +17,7 @@ import life.qbic.portal.portlet.connection.database.userManagementDB.UserManagem
 import life.qbic.portal.portlet.connection.openbis.OpenBisConnection;
 import life.qbic.portal.utils.ConfigurationManager;
 import life.qbic.portal.utils.ConfigurationManagerFactory;
+import life.qbic.portal.utils.PortalUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -74,7 +77,7 @@ public class ConnectionHandler {
     try {
       mysqlUser = conf.getMysqlUser();
       mysqlPW = conf.getMysqlPass();
-      openBisUser = conf.getDataSourceUser();
+      openBisUser = PortalUtils.getUser().toString();
       openBisPw = conf.getDataSourcePassword();
       if (mysqlUser == null || openBisUser == null) {
         throw new Exception();
@@ -84,6 +87,7 @@ public class ConnectionHandler {
       getCredentials(propertyFilePath);
     }
   }
+
 
   private void getCredentials(String propertyFilePath) {
     Properties prop = new Properties();
