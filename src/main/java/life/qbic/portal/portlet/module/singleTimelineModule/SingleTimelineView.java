@@ -63,7 +63,7 @@ public class SingleTimelineView extends Chart {
     o = new PlotOptionsColumnrange();
     o.setColor(new SolidColor("#85929E"));
     potentialtimeSeries.setPlotOptions(o);
-    potentialtimeSeries.setName("pot. time");
+    potentialtimeSeries.setName("Time left");
 
     conf.getChart().setBackgroundColor(new SolidColor("#ffffff"));
     conf.addSeries(potentialtimeSeries);

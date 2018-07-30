@@ -156,7 +156,7 @@ public class ProjectSheetPresenter {
     String dataAnalyzedDate = "Data Analyzed," + currentItem.getItemProperty("dataAnalyzedDate");
 
     try {
-      File projectFile = File.createTempFile(fileName, ".txt");
+      File projectFile = File.createTempFile(fileName, ".csv");
       FileWriter fw = new FileWriter(projectFile);
       BufferedWriter bw = new BufferedWriter(fw);
       bw.write(projectName);
