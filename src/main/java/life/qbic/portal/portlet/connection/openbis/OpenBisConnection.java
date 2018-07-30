@@ -52,6 +52,7 @@ public class OpenBisConnection {
     return projects.getObjects().get(0).getSpace().getCode();
   }
 
+
   public Date getProjectRegistrationDate(Project project) {
     return project.getRegistrationDate();
   }

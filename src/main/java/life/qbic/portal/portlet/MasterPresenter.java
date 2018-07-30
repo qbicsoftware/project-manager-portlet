@@ -106,7 +106,6 @@ public class MasterPresenter {
     } catch (Exception e) {
       LOG.error("No summary possible.");
     }
-    LOG.info("Refreshed views.");
   }
 
   private void makeFilter() {
