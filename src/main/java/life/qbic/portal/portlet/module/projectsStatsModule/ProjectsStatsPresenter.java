@@ -25,15 +25,10 @@ public class ProjectsStatsPresenter {
   public void update() {
     projects = model.getFollowingProjects();
     if (projects.size() > 0) {
-      LOG.info("Projects: " + projects.size());
       overdueProjects = model.getOverdueProjects();
-      LOG.info("Overdue: " + overdueProjects);
       unregisteredProjects = model.getUnregisteredProjects();
-      LOG.info("Unregistered: " + unregisteredProjects);
       intimeProjects = model.getInTimeProjects();
-      LOG.info("In Time: " + intimeProjects);
     } else {
-      LOG.info("No Projects followed." + projects.size());
       overdueProjects = 0;
       intimeProjects = 0;
       overdueProjects = 0;

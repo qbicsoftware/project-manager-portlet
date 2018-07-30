@@ -16,6 +16,7 @@ import com.vaadin.ui.Field;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.renderers.DateRenderer;
 import com.vaadin.ui.renderers.HtmlRenderer;
 import com.vaadin.ui.themes.ValoTheme;
 import java.sql.Connection;
@@ -92,6 +93,7 @@ public class ProjectOVPresenter {
       return;
     }
     try {
+      LOG.info("Init Content model");
       contentModel.init();
     } catch (SQLException exp) {
       return;
@@ -100,6 +102,7 @@ public class ProjectOVPresenter {
     if (contentModel.getFollowingProjects().size() == 0) {
       this.overViewModule.noProjectMessage();
     } else {
+      LOG.info("Set datasource");
       this.overViewModule.getOverviewGrid()
           .setContainerDataSource(this.contentModel.getTableContent());
       this.overViewModule.showGrid();
@@ -124,13 +127,16 @@ public class ProjectOVPresenter {
       }
     });
 
+    LOG.info("Render table");
     renderTable();
+    LOG.info("Chart");
     overviewChartPresenter.getChart().addPointClickListener((PointClickListener) event -> {
       setFilter("projectTime", overviewChartPresenter.getChart().getDataSeriesObject(event));
     });
 
+    LOG.info("Export");
     exportButton = contentModel.exportProjects();
-
+    LOG.info("Finish");
   }
 
   /**
@@ -144,6 +150,7 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().addColumn("projectID").setHeaderCaption("Project");
     overViewModule.getOverviewGrid().addColumn("projectTime").setHeaderCaption("Status");
     overViewModule.getOverviewGrid().addColumn("projectStatus").setHeaderCaption("Progress");
+    //overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
     overViewModule.getOverviewGrid().addColumn("investigatorName")
         .setHeaderCaption("Principal Investigator");
     overViewModule.getOverviewGrid().addColumn("species");
@@ -242,19 +249,19 @@ public class ProjectOVPresenter {
     final GridCellFilter filter = new GridCellFilter(overViewModule.getOverviewGrid());
     configureFilter(filter);
 
-//    try {
-//      overViewModule.getOverviewGrid().getColumn("rawDataRegistered").
-//          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
-//              Locale.ENGLISH));
-//      overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
-//          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
-//              Locale.ENGLISH));
-//      overViewModule.getOverviewGrid().getColumn("dataAnalyzedDate").
-//          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
-//              Locale.ENGLISH));
-//    } catch (Exception e) {
-//      LOG.error("Problems rendering the grid dates.");
-//    }
+    try {
+      overViewModule.getOverviewGrid().getColumn("rawDataRegistered").
+          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
+              Locale.ENGLISH));
+      overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
+          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
+              Locale.ENGLISH));
+      overViewModule.getOverviewGrid().getColumn("dataAnalyzedDate").
+          setRenderer(new DateRenderer("%1$tB %1$te, %1$tY",
+              Locale.ENGLISH));
+    } catch (Exception e) {
+      LOG.error("Problems rendering the grid dates.");
+    }
 
     for (Column column : overViewModule.getOverviewGrid().getColumns()) {
       if (column.getHeaderCaption().equals("Principal Investigator") ||
