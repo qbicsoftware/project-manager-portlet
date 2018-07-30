@@ -186,19 +186,19 @@ public class ProjectOVPresenter {
 
     overViewModule.getOverviewGrid().setCellStyleGenerator(cellRef -> {// Java 8
       if (cellRef.getPropertyId().equals("projectTime") && cellRef.getItem()
-          .getItemProperty("projectTime").getValue().toString().equals("overdue")) {
+          .getItemProperty("projectTime").getValue().equals("overdue")) {
         return "ov";
       } else if (cellRef.getPropertyId().equals("projectTime") && cellRef.getItem()
-          .getItemProperty("projectTime").getValue().toString().equals("unregistered")) {
+          .getItemProperty("projectTime").getValue().equals("unregistered")) {
         return "un";
       } else if (cellRef.getPropertyId().equals("projectTime") && cellRef.getItem()
-          .getItemProperty("projectTime").getValue().toString().equals("in time")) {
+          .getItemProperty("projectTime").getValue().equals("in time")) {
         return "in";
       } else if (cellRef.getPropertyId().equals("projectStatus") && cellRef.getItem()
-          .getItemProperty("projectStatus").getValue().toString().equals("completed")) {
+          .getItemProperty("projectStatus").getValue().equals("completed")) {
         return "in";
       } else if (cellRef.getPropertyId().equals("projectStatus") && cellRef.getItem()
-          .getItemProperty("projectStatus").getValue().toString().equals("open")) {
+          .getItemProperty("projectStatus").getValue().equals("open")) {
         return "un";
       } else {
         return null;

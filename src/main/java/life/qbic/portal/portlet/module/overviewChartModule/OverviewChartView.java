@@ -27,7 +27,7 @@ public class OverviewChartView extends Chart {
     DataLabels dataLabels = new DataLabels();
     dataLabels.setEnabled(true);
     dataLabels
-        .setFormatter("'<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %'");
+        .setFormatter("'<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(0) +' %'");
     plotOptions = new PlotOptionsPie();
     plotOptions.setDataLabels(dataLabels);
     plotOptions.setShowInLegend(true);

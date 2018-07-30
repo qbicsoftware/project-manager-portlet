@@ -30,7 +30,7 @@ public class SingleTimelinePresenter {
   public void update() {
     // Get project info
     Date currentDate = new Date();
-    String projectID = item.getItemProperty("projectID").getValue().toString();
+    String projectID = (String) item.getItemProperty("projectID").getValue();
     Date projectRegisteredDate = (Date) item.getItemProperty("projectRegisteredDate").getValue();
     Date rawDataRegisteredDate = (Date) item.getItemProperty("rawDataRegistered").getValue();
     Date dataAnalyzedDate = (Date) item.getItemProperty("dataAnalyzedDate").getValue();

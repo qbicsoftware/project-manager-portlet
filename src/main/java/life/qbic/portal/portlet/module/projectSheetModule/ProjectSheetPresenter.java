@@ -60,7 +60,7 @@ public class ProjectSheetPresenter {
   }
 
   public Label getProject() {
-    String project = currentItem.getItemProperty("projectID").getValue().toString();
+    String project = (String) currentItem.getItemProperty("projectID").getValue();
     Label label = new Label(project);
     label.setStyleName(ValoTheme.LABEL_COLORED);
     label.addStyleName(ValoTheme.LABEL_H2);
@@ -68,7 +68,7 @@ public class ProjectSheetPresenter {
   }
 
   private Label getProjectTime() {
-    String project = currentItem.getItemProperty("projectTime").getValue().toString();
+    String project = (String) currentItem.getItemProperty("projectTime").getValue();
     Label label = new Label(project);
     label.addStyleName(ValoTheme.LABEL_SMALL);
     if (label.getValue().equals("overdue")) {
@@ -84,7 +84,7 @@ public class ProjectSheetPresenter {
   public Label getDescription() {
     String description = "";
     try {
-      description = currentItem.getItemProperty("description").getValue().toString();
+      description = (String) currentItem.getItemProperty("description").getValue();
     } catch (NullPointerException e) {
       description = "No description available.";
     }
@@ -93,27 +93,28 @@ public class ProjectSheetPresenter {
   }
 
   private Label getProjectDetail() {
-    String pi, species, samples, sampleTypes;
+    String pi, species, sampleTypes;
+    int samples;
     try {
-      pi = currentItem.getItemProperty("investigatorName").getValue().toString();
+      pi = (String) currentItem.getItemProperty("investigatorName").getValue();
     } catch (NullPointerException ex) {
       pi = "Unknown";
     }
 
     try {
-      species = currentItem.getItemProperty("species").getValue().toString();
+      species = (String) currentItem.getItemProperty("species").getValue();
     } catch (NullPointerException ex) {
       species = "Unknown";
     }
 
     try {
-      samples = currentItem.getItemProperty("samples").getValue().toString();
+      samples = (int) currentItem.getItemProperty("samples").getValue();
     } catch (NullPointerException ex) {
-      samples = "Unknown";
+      samples = -1;
     }
 
     try {
-      sampleTypes = currentItem.getItemProperty("sampleTypes").getValue().toString();
+      sampleTypes = (String) currentItem.getItemProperty("sampleTypes").getValue();
     } catch (NullPointerException ex) {
       sampleTypes = "Unknown";
     }
@@ -138,11 +139,11 @@ public class ProjectSheetPresenter {
   }
 
   private Button getExportButton() {
-    String fileName = currentItem.getItemProperty("projectID").getValue().toString();
+    String fileName = (String) currentItem.getItemProperty("projectID").getValue();
     String projectName =
-        "Project," + currentItem.getItemProperty("projectID").getValue().toString();
+        "Project," + currentItem.getItemProperty("projectID").getValue();
     String projectStatus =
-        "Status," + currentItem.getItemProperty("projectTime").getValue().toString();
+        "Status," + currentItem.getItemProperty("projectTime").getValue();
     String projectDescription = "Description," + currentItem.getItemProperty("description");
     String projectPI = "PI," + currentItem.getItemProperty("investigatorName");
     String projectSpecies = "Species," + currentItem.getItemProperty("species");

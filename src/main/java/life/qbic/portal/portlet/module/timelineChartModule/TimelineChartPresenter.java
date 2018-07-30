@@ -43,8 +43,7 @@ public class TimelineChartPresenter {
     for (Object itemId : itemIds) {
       // Get project info
       Date currentDate = new Date();
-      String projectID = tableContent.getContainerProperty(itemId, "projectID").getValue()
-          .toString();
+      String projectID = (String) tableContent.getContainerProperty(itemId, "projectID").getValue();
       Date projectRegisteredDate = (Date) tableContent
           .getContainerProperty(itemId, "projectRegisteredDate").getValue();
       Date rawDataRegisteredDate = (Date) tableContent
