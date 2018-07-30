@@ -93,7 +93,6 @@ public class ProjectOVPresenter {
       return;
     }
     try {
-      LOG.info("Init Content model");
       contentModel.init();
     } catch (SQLException exp) {
       return;
@@ -102,7 +101,6 @@ public class ProjectOVPresenter {
     if (contentModel.getFollowingProjects().size() == 0) {
       this.overViewModule.noProjectMessage();
     } else {
-      LOG.info("Set datasource");
       this.overViewModule.getOverviewGrid()
           .setContainerDataSource(this.contentModel.getTableContent());
       this.overViewModule.showGrid();
@@ -127,16 +125,11 @@ public class ProjectOVPresenter {
       }
     });
 
-    LOG.info("Render table");
     renderTable();
-    LOG.info("Chart");
     overviewChartPresenter.getChart().addPointClickListener((PointClickListener) event -> {
       setFilter("projectTime", overviewChartPresenter.getChart().getDataSeriesObject(event));
     });
-
-    LOG.info("Export");
     exportButton = contentModel.exportProjects();
-    LOG.info("Finish");
   }
 
   /**

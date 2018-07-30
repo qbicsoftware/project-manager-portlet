@@ -2,8 +2,6 @@ package life.qbic.portal.portlet.connection;
 
 import ch.ethz.sis.openbis.generic.asapi.v3.IApplicationServerApi;
 import ch.systemsx.cisd.common.spring.HttpInvokerUtils;
-import com.liferay.portal.util.Portal;
-import com.liferay.portal.util.PortalUtil;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
