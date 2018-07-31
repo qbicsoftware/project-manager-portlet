@@ -92,3 +92,4 @@ target/
 \.idea/modules\.xml
 
 \.idea/project-manager-portlet\.iml
+/.idea/dataSources.xml
