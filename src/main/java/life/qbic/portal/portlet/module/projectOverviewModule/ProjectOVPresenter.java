@@ -1,6 +1,7 @@
 package life.qbic.portal.portlet.module.projectOverviewModule;
 
 import com.vaadin.addon.charts.PointClickListener;
+import com.vaadin.client.ui.Icon;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
@@ -19,6 +20,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.renderers.DateRenderer;
 import com.vaadin.ui.renderers.HtmlRenderer;
 import com.vaadin.ui.themes.ValoTheme;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -204,6 +206,7 @@ public class ProjectOVPresenter {
         return null;
       }
     });
+
 
     columnFieldTypes.clearFromParents();    // Clear from parent nodes (when reloading page)
     setFieldType("projectStatus", columnFieldTypes.getPROJECTSTATUS());
