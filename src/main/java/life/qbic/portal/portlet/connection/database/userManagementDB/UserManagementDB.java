@@ -14,9 +14,7 @@ import org.apache.logging.log4j.Logger;
 public class UserManagementDB {
 
   private static final Logger LOG = LogManager.getLogger(UserManagementDB.class);
-  private String portNumber = "3306";
-  private String serverName = "portal-testing.am10.uni-tuebingen.de";
-  private String connectionURI = "jdbc:mysql://portal-testing.am10.uni-tuebingen.de:3306/qbic_usermanagement_db";
+  private String connectionURI = "jdbc:mysql://portal-database.qbic.uni-tuebingen.de:3306/qbic_usermanagement_db";
   private Connection conn = null;
 
   public UserManagementDB(String userName, String password) {
