@@ -16,9 +16,11 @@ public class ProjectFilter {
 
     filterList = new ArrayList<>();
 
-    projectList.forEach(project -> {
-      filterList.add(new Compare.Equal(id, project));
-    });
+    if (!projectList.isEmpty()) {
+      projectList.forEach(project -> {
+        filterList.add(new Compare.Equal(id, project));
+      });
+    }
 
   }
 

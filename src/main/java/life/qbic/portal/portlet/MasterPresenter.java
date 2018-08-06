@@ -55,7 +55,9 @@ public class MasterPresenter {
 
     projectSheetPresenter.getInformationCommittedFlag()
         .addValueChangeListener(this::refreshModuleViews);
-    projectFilter.createFilter("projectID", projectFollowerPresenter.getFollowingProjects());
+    if (!projectFollowerPresenter.getFollowingProjects().isEmpty()) {
+      projectFilter.createFilter("projectID", projectFollowerPresenter.getFollowingProjects());
+    }
     projectFollowerPresenter.getIsChangedFlag().addValueChangeListener(event -> {
       final String selectedProject = projectFollowerPresenter.getCurrentProject();
       boolean doesDBEntryExist = projectOverviewPresenter
@@ -64,6 +66,7 @@ public class MasterPresenter {
         projectOverviewPresenter.createNewProjectEntry(selectedProject);
       }
       refreshModuleViews(event);
+      projectsStatsPresenter.update();
     });
 
     if (projectFollowerPresenter.getFollowingProjects().size() > 0) {
@@ -90,7 +93,6 @@ public class MasterPresenter {
   private void refreshModuleViews(Property.ValueChangeEvent event) {
     makeFilter();
     projectOverviewPresenter.refreshView();
-    projectsStatsPresenter.update();
     if (contentModel.getFollowingProjects().size() > 0) {
       overviewChartPresenter.update();
       overviewChartPresenter.getChart().setVisible(true);
@@ -106,9 +108,12 @@ public class MasterPresenter {
     } catch (Exception e) {
       LOG.error("No summary possible.");
     }
+    projectsStatsPresenter.update();
   }
 
   private void makeFilter() {
-    projectFilter.createFilter("projectID", projectFollowerPresenter.getFollowingProjects());
+    if (projectFollowerPresenter.getFollowingProjects() != null) {
+      projectFilter.createFilter("projectID", projectFollowerPresenter.getFollowingProjects());
+    }
   }
 }

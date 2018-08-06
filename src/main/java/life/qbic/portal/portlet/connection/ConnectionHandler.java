@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 public class ConnectionHandler {
 
   private static final Logger LOG = LogManager.getLogger(ConnectionHandler.class);
-  private String mysqlUser, mysqlPW, openBisPw, openBisUser;
+  private String mysqlUser, mysqlPW, openBisPw, openBisUser, hostname, port;
   private ConfigurationManager conf = ConfigurationManagerFactory.getInstance();
   private UserManagementDB userManagementDB;
   private ProjectDatabase projectDatabase;
@@ -32,8 +32,8 @@ public class ConnectionHandler {
 
   public ConnectionHandler(ProjectFilter projectFilter) {
     setCredentials();
-    userManagementDB = new UserManagementDB(mysqlUser, mysqlPW);
-    projectDatabase = new ProjectDatabase(mysqlUser, mysqlPW, projectFilter);
+    userManagementDB = new UserManagementDB(mysqlUser, mysqlPW, hostname, port);
+    projectDatabase = new ProjectDatabase(mysqlUser, mysqlPW, hostname, port, projectFilter);
     try {
       projectDatabase.connectToDatabase();
       LOG.info("Connection to project DB established.");
@@ -73,6 +73,8 @@ public class ConnectionHandler {
     try {
       mysqlUser = conf.getMysqlUser();
       mysqlPW = conf.getMysqlPass();
+      hostname = conf.getMsqlHost();
+      port = conf.getMysqlPort();
       openBisUser = PortalUtils.getUser().toString();
       openBisPw = conf.getDataSourcePassword();
       if (mysqlUser == null || openBisUser == null) {
@@ -101,6 +103,8 @@ public class ConnectionHandler {
       openBisUser = prop.getProperty("datasource.user");
       mysqlPW = prop.getProperty("mysql.pass");
       mysqlUser = prop.getProperty("mysql.user");
+      hostname = prop.getProperty("mysql.host");
+      port = prop.getProperty("mysql.port");
 
     } catch (IOException ex) {
       LOG.error("Could not find the property file. ");

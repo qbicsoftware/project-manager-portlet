@@ -1,12 +1,15 @@
 package life.qbic.portal.portlet;
 
+import com.liferay.portal.util.PortalUtil;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Layout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import java.sql.SQLException;
@@ -72,7 +75,9 @@ public class ProjectManagerUI extends QBiCPortletUI {
         .setSQLTableName("followingprojects").setPrimaryKey("id");
     try {
       followerPresenter.startOrchestration();
-    } catch (SQLException | WrongArgumentSettingsException e) {
+    } catch (Exception e) {
+      Notification notification = new Notification("Connection could not be established.");
+      notification.show(Page.getCurrent());
       e.printStackTrace();
     }
 
@@ -180,9 +185,10 @@ public class ProjectManagerUI extends QBiCPortletUI {
     mainFrame.setStyleName("mainpage");
 
     // Init Master Presenter
-    final MasterPresenter masterPresenter = new MasterPresenter(projectOVPresenter,
-        projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter,
-        projectsStatsPresenter, timelineChartPresenter, model);
+      final MasterPresenter masterPresenter = new MasterPresenter(projectOVPresenter,
+          projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter,
+          projectsStatsPresenter, timelineChartPresenter, model);
+
 
     LOG.info("Project Manager initialized.");
 

@@ -1,5 +1,7 @@
 package life.qbic.portal.portlet.connection.database.userManagementDB;
 
+import com.vaadin.server.Page;
+import com.vaadin.ui.Notification;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,13 +16,11 @@ import org.apache.logging.log4j.Logger;
 public class UserManagementDB {
 
   private static final Logger LOG = LogManager.getLogger(UserManagementDB.class);
-  private String connectionURI = "jdbc:mysql://portal-database.qbic.uni-tuebingen.de:3306/qbic_usermanagement_db";
   private Connection conn = null;
+  private String database = "qbic_usermanagement_db";
 
-  public UserManagementDB(String userName, String password) {
-    Properties connectionProps = new Properties();
-    connectionProps.put("user", userName);
-    connectionProps.put("password", password);
+  public UserManagementDB(String userName, String password, String hostname, String port) {
+    String connectionURI = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
 
     try {
       Class.forName("com.mysql.jdbc.Driver");
@@ -32,6 +32,9 @@ public class UserManagementDB {
     } catch (ClassNotFoundException e) {
       LOG.error("Connection to user management DB failed. [ClassNotFoundException]");
       e.printStackTrace();
+    } finally {
+      Notification notification = new Notification("Connection could not be established.");
+      notification.show(Page.getCurrent());
     }
   }
 
@@ -40,7 +43,7 @@ public class UserManagementDB {
     Statement stmt = null;
     int projectID = -1;
     String query = "SELECT id " +
-        "FROM " + "qbic_usermanagement_db" + ".projects" +
+        "FROM " + database + ".projects" +
         " WHERE " + "openbis_project_identifier" + " LIKE " + "'%" + projectCode + "%'";
     try {
       stmt = conn.createStatement();
@@ -70,7 +73,7 @@ public class UserManagementDB {
     Statement stmt = null;
     int personID = -1;
     String query = "SELECT * " +
-        "FROM " + "qbic_usermanagement_db" + ".projects_persons" +
+        "FROM " + database + ".projects_persons" +
         " WHERE " + "project_id" + "=" + projectID + " AND " + "project_role" + " LIKE " + "'%PI%'";
     try {
       stmt = conn.createStatement();
@@ -96,7 +99,7 @@ public class UserManagementDB {
     Statement stmt = null;
     String pi = null;
     String query = "SELECT * " +
-        "FROM " + "qbic_usermanagement_db" + ".persons" +
+        "FROM " + database + ".persons" +
         " WHERE " + "id" + "=" + personID;
     try {
       stmt = conn.createStatement();
@@ -126,7 +129,7 @@ public class UserManagementDB {
     Statement stmt = null;
     String email = null;
     String query = "SELECT email " +
-        "FROM " + "qbic_usermanagement_db" + ".persons" +
+        "FROM " + database + ".persons" +
         " WHERE " + "id" + "=" + personID;
     try {
       stmt = conn.createStatement();

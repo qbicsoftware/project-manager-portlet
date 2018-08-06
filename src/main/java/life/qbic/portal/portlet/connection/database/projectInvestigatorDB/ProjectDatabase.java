@@ -16,16 +16,18 @@ import java.util.List;
 public class ProjectDatabase implements ProjectDatabaseConnector {
 
   private String driverName = "com.mysql.jdbc.Driver";
-  private String connectionURI = "jdbc:mysql://portal-database.qbic.uni-tuebingen.de:3306/project_investigator_db";
   private JDBCConnectionPool pool;
+  private String connectionURI;
+  private String database = "project_investigator_db";
   private String user;
   private String password;
   private ProjectFilter filter;
 
-  public ProjectDatabase(String user, String password, ProjectFilter filter) {
+  public ProjectDatabase(String user, String password, String hostname, String port, ProjectFilter filter) {
     this.user = user;
     this.password = password;
     this.filter = filter;
+    connectionURI = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
   }
 
   @Override
