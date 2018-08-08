@@ -29,12 +29,13 @@ public class UserManagementDB {
     } catch (SQLException e) {
       LOG.error("Connection to user management DB failed. [SQLException]");
       e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-      LOG.error("Connection to user management DB failed. [ClassNotFoundException]");
-      e.printStackTrace();
-    } finally {
       Notification notification = new Notification("Connection could not be established.");
       notification.show(Page.getCurrent());
+    } catch (ClassNotFoundException e) {
+      LOG.error("Connection to user management DB failed. [ClassNotFoundException]");
+      Notification notification = new Notification("Connection could not be established.");
+      notification.show(Page.getCurrent());
+      e.printStackTrace();
     }
   }
 
@@ -158,15 +159,15 @@ public class UserManagementDB {
 
   public String getOfferID(String projectCode) {
     Statement stmt = null;
-    String offerID = "";
-    String query = "SELECT offer_id " +
+    String offerNumber= "";
+    String query = "SELECT offer_number " +
         "FROM " + "facs_facility" + ".offers" +
         " WHERE " + "offer_project_reference" + " LIKE " + "'%" + projectCode + "%'";
     try {
       stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
       while (rs.next()) {
-        offerID = rs.getString("offer_number");
+        offerNumber = rs.getString("offer_number");
       }
     } catch (NullPointerException e) {
       //nothing
@@ -181,7 +182,8 @@ public class UserManagementDB {
         }
       }
     }
-    return offerID;
+
+    return offerNumber;
   }
 
 
