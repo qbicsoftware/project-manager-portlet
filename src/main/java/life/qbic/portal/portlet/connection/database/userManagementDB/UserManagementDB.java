@@ -99,6 +99,7 @@ public class UserManagementDB {
   public String getPI(int personID) {
     Statement stmt = null;
     String pi = null;
+    String title = "";
     String query = "SELECT * " +
         "FROM " + database + ".persons" +
         " WHERE " + "id" + "=" + personID;
@@ -106,7 +107,9 @@ public class UserManagementDB {
       stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
       while (rs.next()) {
-        String title = rs.getString("title");
+        if (rs.getString("title") != null) {
+          title = rs.getString("title");
+        }
         String first = rs.getString("first_name");
         String family = rs.getString("family_name");
         pi = title + " " + first + " " + family;
