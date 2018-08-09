@@ -60,11 +60,13 @@ public class ProjectOVPresenter {
   private Button unfollowButton = new Button("Unfollow");
   private Button detailsButton = new Button("Details");
   private Button exportButton = new Button("Export");
+  private Button clearAllFilters;
   private String portalURL = "https://portal.qbic.uni-tuebingen.de/portal/web/qbic/qnavigator#!project/";
   private ColumnFieldTypes columnFieldTypes;
   private OverviewChartPresenter overviewChartPresenter;
   private OpenBisConnection openbis;
   private Item selectedProjectItem = null;
+  private HorizontalLayout buttonLayout;
 
   public ProjectOVPresenter(ProjectContentModel model,
       ProjectOverviewModule overViewModule,
@@ -320,18 +322,15 @@ public class ProjectOVPresenter {
             "sampleTypes",
             "projectRegisteredDate",
             "rawDataRegistered", "dataAnalyzedDate", "offerID", "invoice");
-    HorizontalLayout buttonLayout = new HorizontalLayout();
+    buttonLayout = new HorizontalLayout();
     buttonLayout.setSpacing(true);
     firstHeaderRow.getCell("projectID").setComponent(buttonLayout);
-    Button clearAllFilters = new Button("", (Button.ClickListener) clickEvent ->
+    clearAllFilters = new Button("", (Button.ClickListener) clickEvent ->
         filter.clearAllFilters());
     clearAllFilters.setDescription("Clear all filters.");
     clearAllFilters.setIcon(FontAwesome.TIMES);
     clearAllFilters.addStyleName(ValoTheme.BUTTON_QUIET);
-    exportButton = contentModel.exportProjects();
-    buttonLayout.addComponents(clearAllFilters, unfollowButton, detailsButton, exportButton);
-    buttonLayout.setComponentAlignment(unfollowButton, Alignment.MIDDLE_RIGHT);
-    buttonLayout.setComponentAlignment(detailsButton, Alignment.MIDDLE_LEFT);
+    refreshButtonLayout();
   }
 
 
@@ -379,6 +378,13 @@ public class ProjectOVPresenter {
     return this.selectedProjectItem;
   }
 
+  public void refreshButtonLayout(){
+    buttonLayout.removeAllComponents();
+    exportButton = contentModel.exportProjects();
+    buttonLayout.addComponents(clearAllFilters, unfollowButton, detailsButton, exportButton);
+    buttonLayout.setComponentAlignment(unfollowButton, Alignment.MIDDLE_RIGHT);
+    buttonLayout.setComponentAlignment(detailsButton, Alignment.MIDDLE_LEFT);
+  }
   /**
    * Refreshes the grid
    */
@@ -386,7 +392,8 @@ public class ProjectOVPresenter {
     try {
       // First, refresh the model (new SQL query!)
       this.contentModel.refresh();
-      exportButton = contentModel.exportProjects();
+     refreshButtonLayout();
+
 
       int timer = 0;
 
