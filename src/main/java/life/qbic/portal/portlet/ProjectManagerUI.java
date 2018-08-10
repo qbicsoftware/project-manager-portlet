@@ -60,6 +60,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     ProjectFilter projectFilter = new ProjectFilter();
 
     ConnectionHandler connectionHandler = new ConnectionHandler(projectFilter);
+  LOG.info("User " + connectionHandler.getUserID() + " logged in.");
 
     // Init Project Follower (Slider)
     LOG.info("Init Project Follower");

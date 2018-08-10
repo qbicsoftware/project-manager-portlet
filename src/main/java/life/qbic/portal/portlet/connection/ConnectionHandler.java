@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 public class ConnectionHandler {
 
   private static final Logger LOG = LogManager.getLogger(ConnectionHandler.class);
-  private String mysqlUser, mysqlPW, openBisPw, openBisUser, hostname, port;
+  private String mysqlUser, mysqlPW, openBisPw, openBisUser, openBisUrl, userID, hostname, port;
   private ConfigurationManager conf = ConfigurationManagerFactory.getInstance();
   private UserManagementDB userManagementDB;
   private ProjectDatabase projectDatabase;
@@ -52,7 +52,7 @@ public class ConnectionHandler {
 
       // get a reference to AS API
       IApplicationServerApi app = HttpInvokerUtils.createServiceStub(IApplicationServerApi.class,
-          "https://qbis.qbic.uni-tuebingen.de/openbis/openbis" + IApplicationServerApi.SERVICE_URL,
+          openBisUrl + IApplicationServerApi.SERVICE_URL,
           10000);
 
       String sessionToken = "";
@@ -75,8 +75,10 @@ public class ConnectionHandler {
       mysqlPW = conf.getMysqlPass();
       hostname = conf.getMsqlHost();
       port = conf.getMysqlPort();
-      openBisUser = PortalUtils.getUser().toString();
+      openBisUser = conf.getDataSourceUser();
       openBisPw = conf.getDataSourcePassword();
+      openBisUrl = conf.getDataSourceApiUrl();
+      userID = PortalUtils.getUser().toString();
       if (mysqlUser == null || openBisUser == null) {
         throw new Exception();
       }
@@ -101,6 +103,8 @@ public class ConnectionHandler {
       // get the property value and print it out
       openBisPw = prop.getProperty("datasource.password");
       openBisUser = prop.getProperty("datasource.user");
+      userID = prop.getProperty("portal.user");
+      openBisUrl = prop.getProperty("datasource.url");
       mysqlPW = prop.getProperty("mysql.pass");
       mysqlUser = prop.getProperty("mysql.user");
       hostname = prop.getProperty("mysql.host");
@@ -134,5 +138,9 @@ public class ConnectionHandler {
 
   public OpenBisConnection getOpenBisConnection() {
     return openBisConnection;
+  }
+
+  public String getUserID() {
+    return userID;
   }
 }
