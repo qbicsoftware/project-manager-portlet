@@ -72,7 +72,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
         .build();
     ProjectFollowerPresenter followerPresenter = new ProjectFollowerPresenter(followerView,
         followerModel, connectionHandler.getOpenBisConnection());
-    followerPresenter.setUserID(connectionHandler.getOpenBisUser())
+    followerPresenter.setUserID(connectionHandler.getUserID())
         .setSQLTableName("followingprojects").setPrimaryKey("id");
     try {
       followerPresenter.startOrchestration();
@@ -121,7 +121,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
       try {
         String id = projectOVPresenter.getSelectedProject().getValue();
         followerModel
-            .unfollowProject("followingprojects", id, connectionHandler.getOpenBisUser(), "id");
+            .unfollowProject("followingprojects", id, connectionHandler.getUserID(), "id");
         followerPresenter.refreshProjects();
         followerPresenter.switchIsChangedFlag();
         projectOverviewModule.getOverviewGrid().deselectAll();

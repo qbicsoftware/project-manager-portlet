@@ -18,4 +18,10 @@
   <inherits name="com.vaadin.addon.charts.Widgetset"/>
 
   <inherits name="org.vaadin.sliderpanel.WidgetSet"/>
+
+    
+
+    
+
+    
 </module>
