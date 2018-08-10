@@ -10,10 +10,12 @@ public class SingleTimelinePresenter {
 
   private SingleTimelineView view;
   private Item item;
+  private Date projectRegisteredDate, rawDataRegisteredDate, dataAnalyzedDate, currentDate, overdueDate;
 
   public SingleTimelinePresenter(Item item, SingleTimelineView view) {
     this.item = item;
     this.view = view;
+    update();
   }
 
   private static long getDateDiff(Date date1, Date date2) {
@@ -29,11 +31,11 @@ public class SingleTimelinePresenter {
 
   public void update() {
     // Get project info
-    Date currentDate = new Date();
+     currentDate = new Date();
     String projectID = (String) item.getItemProperty("projectID").getValue();
-    Date projectRegisteredDate = (Date) item.getItemProperty("projectRegisteredDate").getValue();
-    Date rawDataRegisteredDate = (Date) item.getItemProperty("rawDataRegistered").getValue();
-    Date dataAnalyzedDate = (Date) item.getItemProperty("dataAnalyzedDate").getValue();
+     projectRegisteredDate = (Date) item.getItemProperty("projectRegisteredDate").getValue();
+     rawDataRegisteredDate = (Date) item.getItemProperty("rawDataRegistered").getValue();
+     dataAnalyzedDate = (Date) item.getItemProperty("dataAnalyzedDate").getValue();
 
     // Create chart items
     createItem(projectID, rawDataRegisteredDate, dataAnalyzedDate, currentDate,
@@ -71,7 +73,7 @@ public class SingleTimelinePresenter {
       Calendar c = Calendar.getInstance();
       c.setTime(rawDataRegisteredDate);
       c.add(Calendar.DATE, 42);
-      Date overdueDate = c.getTime();
+      overdueDate = c.getTime();
       pottimeItem.setName(projectID);
       pottimeItem.setLow(rawDataRegisteredDate.getTime());
       pottimeItem.setHigh(overdueDate.getTime());
@@ -107,4 +109,23 @@ public class SingleTimelinePresenter {
     }
   }
 
+  public Date getProjectRegisteredDate() {
+    return projectRegisteredDate;
+  }
+
+  public Date getRawDataRegisteredDate() {
+    return rawDataRegisteredDate;
+  }
+
+  public Date getDataAnalyzedDate() {
+    return dataAnalyzedDate;
+  }
+
+  public Date getCurrentDate() {
+    return currentDate;
+  }
+
+  public Date getOverdueDate() {
+    return overdueDate;
+  }
 }

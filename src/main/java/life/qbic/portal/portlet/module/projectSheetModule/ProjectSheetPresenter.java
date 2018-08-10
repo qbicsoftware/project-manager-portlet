@@ -15,6 +15,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import life.qbic.portal.portlet.module.singleTimelineModule.SingleTimelinePresenter;
 import life.qbic.portal.portlet.module.singleTimelineModule.SingleTimelineView;
 
@@ -45,12 +46,11 @@ public class ProjectSheetPresenter {
       projectDetailLayout.setMargin(new MarginInfo(true, true, false, true));
       HorizontalLayout bottomLayout = new HorizontalLayout();
       bottomLayout.setSpacing(true);
-      bottomLayout.addComponents(getProjectTime(), getExportButton());
-      projectDetailLayout
-          .addComponents(getProject(), getDescription(), getProjectDetail(), bottomLayout);
-
       SingleTimelinePresenter st = new SingleTimelinePresenter(currentItem,
           new SingleTimelineView());
+      bottomLayout.addComponents(getExportButton(), getProjectTime(st));
+      projectDetailLayout
+          .addComponents(getProject(), getDescription(), getProjectDetail(), bottomLayout);
       projectSheetView.getProjectSheet().addComponent(projectDetailLayout);
       projectSheetView.getProjectSheet().addComponent(st.getChart());
 
@@ -67,17 +67,24 @@ public class ProjectSheetPresenter {
     return label;
   }
 
-  private Label getProjectTime() {
-    String project = (String) currentItem.getItemProperty("projectTime").getValue();
-    Label label = new Label(project);
-    label.addStyleName(ValoTheme.LABEL_SMALL);
-    if (label.getValue().equals("overdue")) {
+  private Label getProjectTime(SingleTimelinePresenter st) {
+    String projectTime = (String) currentItem.getItemProperty("projectTime").getValue();
+    Label label = new Label();
+    if (projectTime.equals("overdue")) {
       label.setStyleName("red");
-    } else if (label.getValue().equals("unregistered")) {
+      long daysOverdue = TimeUnit.DAYS.convert(st.getCurrentDate().getTime() - st.getOverdueDate().getTime(), TimeUnit.MILLISECONDS);
+      label.setValue(projectTime + " since " + daysOverdue + " days");
+    } else if (projectTime.equals("unregistered")) {
       label.setStyleName("orange");
-    } else if (label.getValue().equals("in time")) {
+      long daysUnregistered = TimeUnit.DAYS.convert(st.getCurrentDate().getTime() - st.getProjectRegisteredDate().getTime(), TimeUnit.MILLISECONDS);
+      label.setValue(projectTime + " since " + daysUnregistered + " days");
+    } else if (projectTime.equals("in time")) {
       label.setStyleName("green");
+      long daysIntime = TimeUnit.DAYS.convert(st.getCurrentDate().getTime() - st.getRawDataRegisteredDate().getTime(), TimeUnit.MILLISECONDS);
+      label.setValue(projectTime + " since " + daysIntime + " days");
     }
+    label.addStyleName(ValoTheme.LABEL_SMALL);
+
     return label;
   }
 
