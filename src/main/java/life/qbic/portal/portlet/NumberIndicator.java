@@ -39,8 +39,14 @@ public class NumberIndicator extends VerticalLayout {
     return number;
   }
 
-  public void setNumber(Integer number) {
-    this.number.setValue(number.toString());
+  public void setNumber(String number) {
+    this.number.setValue(number);
+  }
+
+  public void setStyleName(String caption, String number) {
+    this.caption.setStyleName(caption);
+    this.number.setStyleName(number);
+
   }
 
 

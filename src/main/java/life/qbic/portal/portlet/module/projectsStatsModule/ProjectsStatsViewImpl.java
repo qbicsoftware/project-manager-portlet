@@ -23,18 +23,18 @@ public class ProjectsStatsViewImpl implements ProjectsStatsView {
 
     totalProjectsNI = new NumberIndicator();
     totalProjectsNI.setHeader("All Projects");
-    totalProjectsNI.setNumber(0);
+    totalProjectsNI.setNumber("0");
     overdueProjectsNI = new NumberIndicator();
     overdueProjectsNI.setHeader("Overdue");
-    overdueProjectsNI.setNumber(0);
+    overdueProjectsNI.setNumber("0");
     overdueProjectsNI.getNumber().setStyleName("overdue");
     unregisteredProjectsNI = new NumberIndicator();
     unregisteredProjectsNI.setHeader("Unregistered");
-    unregisteredProjectsNI.setNumber(0);
+    unregisteredProjectsNI.setNumber("0");
     unregisteredProjectsNI.getNumber().setStyleName("unregistered");
     inTimeProjectsNI = new NumberIndicator();
     inTimeProjectsNI.setHeader("In Time");
-    inTimeProjectsNI.setNumber(0);
+    inTimeProjectsNI.setNumber("0");
     inTimeProjectsNI.getNumber().setStyleName("intime");
     statsLayout.addComponents(totalProjectsNI, inTimeProjectsNI, overdueProjectsNI,
         unregisteredProjectsNI);
@@ -44,22 +44,22 @@ public class ProjectsStatsViewImpl implements ProjectsStatsView {
 
   @Override
   public void setNumberOfTotalProjects(int number) {
-    totalProjectsNI.setNumber(number);
+    totalProjectsNI.setNumber(Integer.toString(number));
   }
 
   @Override
   public void setNumberOfOverdueProjects(int number) {
-    overdueProjectsNI.setNumber(number);
+    overdueProjectsNI.setNumber(Integer.toString(number));
   }
 
   @Override
   public void setNumberOfUnregisteredProjects(int number) {
-    unregisteredProjectsNI.setNumber(number);
+    unregisteredProjectsNI.setNumber(Integer.toString(number));
   }
 
   @Override
   public void setNumberOfInTimeProjects(int number) {
-    inTimeProjectsNI.setNumber(number);
+    inTimeProjectsNI.setNumber(Integer.toString(number));
   }
 
   @Override

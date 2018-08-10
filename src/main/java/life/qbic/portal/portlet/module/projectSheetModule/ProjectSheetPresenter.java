@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import life.qbic.portal.portlet.NumberIndicator;
 import life.qbic.portal.portlet.module.singleTimelineModule.SingleTimelinePresenter;
 import life.qbic.portal.portlet.module.singleTimelineModule.SingleTimelineView;
 
@@ -42,16 +43,24 @@ public class ProjectSheetPresenter {
       currentItem = project;
       projectSheetView.getProjectSheet()
           .setCaption("Project Details");
+      HorizontalLayout sheetLayout = new HorizontalLayout();
+      HorizontalLayout statusLayout = new HorizontalLayout();
+      statusLayout.setMargin(true);
+      statusLayout.setSpacing(true);
       VerticalLayout projectDetailLayout = new VerticalLayout();
       projectDetailLayout.setMargin(new MarginInfo(true, true, false, true));
       HorizontalLayout bottomLayout = new HorizontalLayout();
       bottomLayout.setSpacing(true);
       SingleTimelinePresenter st = new SingleTimelinePresenter(currentItem,
           new SingleTimelineView());
-      bottomLayout.addComponents(getExportButton(), getProjectTime(st));
+      bottomLayout.addComponents(getExportButton());
       projectDetailLayout
           .addComponents(getProject(), getDescription(), getProjectDetail(), bottomLayout);
-      projectSheetView.getProjectSheet().addComponent(projectDetailLayout);
+      statusLayout.addComponent(getProjectTime(st));
+      statusLayout.addStyleName(ValoTheme.LAYOUT_CARD);
+      sheetLayout.addComponents(projectDetailLayout, statusLayout);
+      sheetLayout.setSizeFull();
+      projectSheetView.getProjectSheet().addComponent(sheetLayout);
       projectSheetView.getProjectSheet().addComponent(st.getChart());
 
       st.update();
@@ -67,31 +76,43 @@ public class ProjectSheetPresenter {
     return label;
   }
 
-  private Label getProjectTime(SingleTimelinePresenter st) {
+  private NumberIndicator getProjectTime(SingleTimelinePresenter st) {
     String projectTime = (String) currentItem.getItemProperty("projectTime").getValue();
-    Label label = new Label();
+    NumberIndicator statusIndicator = new NumberIndicator();
     if (projectTime.equals("overdue")) {
-      label.setStyleName("red");
-      long daysOverdue = TimeUnit.DAYS
+      long daysOverdue;
+      long current = TimeUnit.DAYS
           .convert(st.getCurrentDate().getTime() - st.getOverdueDate().getTime(),
               TimeUnit.MILLISECONDS);
-      label.setValue(projectTime + " since " + daysOverdue + " days");
+      long analyzed = TimeUnit.DAYS
+          .convert(st.getDataAnalyzedDate().getTime() - st.getOverdueDate().getTime(),
+              TimeUnit.MILLISECONDS);
+      if (current < analyzed) {
+        daysOverdue = current;
+      } else {
+        daysOverdue = analyzed;
+      }
+
+      statusIndicator.setNumber(Long.toString(daysOverdue) + " days");
+      statusIndicator.setHeader("Overdue");
+      statusIndicator.setStyleName("overdue", "overdue");
     } else if (projectTime.equals("unregistered")) {
-      label.setStyleName("orange");
       long daysUnregistered = TimeUnit.DAYS
           .convert(st.getCurrentDate().getTime() - st.getProjectRegisteredDate().getTime(),
               TimeUnit.MILLISECONDS);
-      label.setValue(projectTime + " since " + daysUnregistered + " days");
+      statusIndicator.setNumber(Long.toString(daysUnregistered) + " days");
+      statusIndicator.setHeader("Unregistered");
+      statusIndicator.setStyleName("unregistered", "unregistered");
     } else if (projectTime.equals("in time")) {
-      label.setStyleName("green");
       long daysIntime = TimeUnit.DAYS
           .convert(st.getCurrentDate().getTime() - st.getRawDataRegisteredDate().getTime(),
               TimeUnit.MILLISECONDS);
-      label.setValue(projectTime + " since " + daysIntime + " days");
+      statusIndicator.setNumber(Long.toString(daysIntime) + " days left");
+      statusIndicator.setHeader("In Time");
+      statusIndicator.setStyleName("intime", "intime");
     }
-    label.addStyleName(ValoTheme.LABEL_SMALL);
 
-    return label;
+    return statusIndicator;
   }
 
   public Label getDescription() {
