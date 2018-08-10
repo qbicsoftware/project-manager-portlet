@@ -84,7 +84,7 @@ public class OpenBisConnection {
       species = getTaxonomy(species);
     }
 
-    if (species.equals("")) {
+    if (species == null || species.equals("")) {
       species = "unkown";
     }
     return species;

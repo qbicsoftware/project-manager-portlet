@@ -78,7 +78,7 @@ public class ConnectionHandler {
       openBisUser = conf.getDataSourceUser();
       openBisPw = conf.getDataSourcePassword();
       openBisUrl = conf.getDataSourceApiUrl();
-      userID = PortalUtils.getUser().toString();
+      userID = PortalUtils.getUser().getScreenName();
       if (mysqlUser == null || openBisUser == null) {
         throw new Exception();
       }
