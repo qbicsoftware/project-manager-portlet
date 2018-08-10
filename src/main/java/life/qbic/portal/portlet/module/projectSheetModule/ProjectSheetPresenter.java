@@ -84,6 +84,7 @@ public class ProjectSheetPresenter {
       long current = TimeUnit.DAYS
           .convert(st.getCurrentDate().getTime() - st.getOverdueDate().getTime(),
               TimeUnit.MILLISECONDS);
+      try {
       long analyzed = TimeUnit.DAYS
           .convert(st.getDataAnalyzedDate().getTime() - st.getOverdueDate().getTime(),
               TimeUnit.MILLISECONDS);
@@ -91,6 +92,8 @@ public class ProjectSheetPresenter {
         daysOverdue = current;
       } else {
         daysOverdue = analyzed;
+      } } catch (NullPointerException e) {
+        daysOverdue = current;
       }
 
       statusIndicator.setNumber(Long.toString(daysOverdue) + " days");
