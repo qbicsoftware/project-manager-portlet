@@ -39,6 +39,7 @@ import life.qbic.portal.portlet.module.overviewChartModule.OverviewChartPresente
 import life.qbic.portal.portlet.project.ProjectContentModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.vaadin.grid.cellrenderers.action.HtmlButtonRenderer;
 import org.vaadin.gridutil.cell.GridCellFilter;
 
 /**

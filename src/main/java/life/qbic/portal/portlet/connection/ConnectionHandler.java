@@ -56,7 +56,7 @@ public class ConnectionHandler {
           10000);
 
       String sessionToken = "";
-      sessionToken = app.login(openBisUser, openBisPw);
+      sessionToken = app.loginAs(openBisUser, openBisPw, userID);
       openBisConnection = new OpenBisConnection(app, sessionToken);
       LOG.info("Connection to openBIS established.");
 
