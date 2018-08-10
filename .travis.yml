@@ -18,7 +18,7 @@ install: true
 branches:
   only:
   - master
-  
+
 script:
 - mvn --settings .travis.settings.xml clean cobertura:cobertura deploy
 after_success:

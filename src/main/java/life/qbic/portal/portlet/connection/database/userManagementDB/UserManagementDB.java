@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
 import life.qbic.portal.Styles;
 import life.qbic.portal.Styles.NotificationType;
 import org.apache.logging.log4j.LogManager;
@@ -162,7 +161,7 @@ public class UserManagementDB {
 
   public String getOfferID(String projectCode) {
     Statement stmt = null;
-    String offerNumber= "";
+    String offerNumber = "";
     String query = "SELECT offer_number " +
         "FROM " + "facs_facility" + ".offers" +
         " WHERE " + "offer_project_reference" + " LIKE " + "'%" + projectCode + "%'";

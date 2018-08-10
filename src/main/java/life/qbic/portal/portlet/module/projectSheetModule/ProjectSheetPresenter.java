@@ -72,15 +72,21 @@ public class ProjectSheetPresenter {
     Label label = new Label();
     if (projectTime.equals("overdue")) {
       label.setStyleName("red");
-      long daysOverdue = TimeUnit.DAYS.convert(st.getCurrentDate().getTime() - st.getOverdueDate().getTime(), TimeUnit.MILLISECONDS);
+      long daysOverdue = TimeUnit.DAYS
+          .convert(st.getCurrentDate().getTime() - st.getOverdueDate().getTime(),
+              TimeUnit.MILLISECONDS);
       label.setValue(projectTime + " since " + daysOverdue + " days");
     } else if (projectTime.equals("unregistered")) {
       label.setStyleName("orange");
-      long daysUnregistered = TimeUnit.DAYS.convert(st.getCurrentDate().getTime() - st.getProjectRegisteredDate().getTime(), TimeUnit.MILLISECONDS);
+      long daysUnregistered = TimeUnit.DAYS
+          .convert(st.getCurrentDate().getTime() - st.getProjectRegisteredDate().getTime(),
+              TimeUnit.MILLISECONDS);
       label.setValue(projectTime + " since " + daysUnregistered + " days");
     } else if (projectTime.equals("in time")) {
       label.setStyleName("green");
-      long daysIntime = TimeUnit.DAYS.convert(st.getCurrentDate().getTime() - st.getRawDataRegisteredDate().getTime(), TimeUnit.MILLISECONDS);
+      long daysIntime = TimeUnit.DAYS
+          .convert(st.getCurrentDate().getTime() - st.getRawDataRegisteredDate().getTime(),
+              TimeUnit.MILLISECONDS);
       label.setValue(projectTime + " since " + daysIntime + " days");
     }
     label.addStyleName(ValoTheme.LABEL_SMALL);

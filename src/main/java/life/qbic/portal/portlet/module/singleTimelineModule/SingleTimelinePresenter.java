@@ -31,11 +31,11 @@ public class SingleTimelinePresenter {
 
   public void update() {
     // Get project info
-     currentDate = new Date();
+    currentDate = new Date();
     String projectID = (String) item.getItemProperty("projectID").getValue();
-     projectRegisteredDate = (Date) item.getItemProperty("projectRegisteredDate").getValue();
-     rawDataRegisteredDate = (Date) item.getItemProperty("rawDataRegistered").getValue();
-     dataAnalyzedDate = (Date) item.getItemProperty("dataAnalyzedDate").getValue();
+    projectRegisteredDate = (Date) item.getItemProperty("projectRegisteredDate").getValue();
+    rawDataRegisteredDate = (Date) item.getItemProperty("rawDataRegistered").getValue();
+    dataAnalyzedDate = (Date) item.getItemProperty("dataAnalyzedDate").getValue();
 
     // Create chart items
     createItem(projectID, rawDataRegisteredDate, dataAnalyzedDate, currentDate,

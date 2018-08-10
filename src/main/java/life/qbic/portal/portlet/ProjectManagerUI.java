@@ -1,6 +1,5 @@
 package life.qbic.portal.portlet;
 
-import com.liferay.portal.util.PortalUtil;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.Page;
@@ -60,7 +59,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     ProjectFilter projectFilter = new ProjectFilter();
 
     ConnectionHandler connectionHandler = new ConnectionHandler(projectFilter);
-  LOG.info("User " + connectionHandler.getUserID() + " logged in.");
+    LOG.info("User " + connectionHandler.getUserID() + " logged in.");
 
     // Init Project Follower (Slider)
     LOG.info("Init Project Follower");
@@ -186,10 +185,9 @@ public class ProjectManagerUI extends QBiCPortletUI {
     mainFrame.setStyleName("mainpage");
 
     // Init Master Presenter
-      final MasterPresenter masterPresenter = new MasterPresenter(projectOVPresenter,
-          projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter,
-          projectsStatsPresenter, timelineChartPresenter, model);
-
+    final MasterPresenter masterPresenter = new MasterPresenter(projectOVPresenter,
+        projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter,
+        projectsStatsPresenter, timelineChartPresenter, model);
 
     LOG.info("Project Manager initialized.");
 

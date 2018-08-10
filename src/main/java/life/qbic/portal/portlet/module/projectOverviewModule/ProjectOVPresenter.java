@@ -1,7 +1,6 @@
 package life.qbic.portal.portlet.module.projectOverviewModule;
 
 import com.vaadin.addon.charts.PointClickListener;
-import com.vaadin.client.ui.Icon;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
@@ -20,7 +19,6 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.renderers.DateRenderer;
 import com.vaadin.ui.renderers.HtmlRenderer;
 import com.vaadin.ui.themes.ValoTheme;
-import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -209,7 +207,6 @@ public class ProjectOVPresenter {
       }
     });
 
-
     columnFieldTypes.clearFromParents();    // Clear from parent nodes (when reloading page)
     setFieldType("projectStatus", columnFieldTypes.getPROJECTSTATUS());
 
@@ -378,13 +375,14 @@ public class ProjectOVPresenter {
     return this.selectedProjectItem;
   }
 
-  public void refreshButtonLayout(){
+  public void refreshButtonLayout() {
     buttonLayout.removeAllComponents();
     exportButton = contentModel.exportProjects();
     buttonLayout.addComponents(clearAllFilters, unfollowButton, detailsButton, exportButton);
     buttonLayout.setComponentAlignment(unfollowButton, Alignment.MIDDLE_RIGHT);
     buttonLayout.setComponentAlignment(detailsButton, Alignment.MIDDLE_LEFT);
   }
+
   /**
    * Refreshes the grid
    */
@@ -392,8 +390,7 @@ public class ProjectOVPresenter {
     try {
       // First, refresh the model (new SQL query!)
       this.contentModel.refresh();
-     refreshButtonLayout();
-
+      refreshButtonLayout();
 
       int timer = 0;
 

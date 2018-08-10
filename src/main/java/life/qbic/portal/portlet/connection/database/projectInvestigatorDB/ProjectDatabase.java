@@ -23,7 +23,8 @@ public class ProjectDatabase implements ProjectDatabaseConnector {
   private String password;
   private ProjectFilter filter;
 
-  public ProjectDatabase(String user, String password, String hostname, String port, ProjectFilter filter) {
+  public ProjectDatabase(String user, String password, String hostname, String port,
+      ProjectFilter filter) {
     this.user = user;
     this.password = password;
     this.filter = filter;
