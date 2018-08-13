@@ -12,15 +12,15 @@ notifications:
   slack:
     on_success: never
     on_failure: always
-
 install: true
-
 branches:
   only:
   - master
-
 script:
 - mvn --settings .travis.settings.xml clean cobertura:cobertura deploy
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 - mvn --settings .travis.settings.xml site
+env:
+  global:
+    secure: wtPVzUiyaA2S/XENiOVyCyBVB4q6kitwmbituM9czInP/zgW3kHsipXcpGd207J3buZ0Ps+VZJMtg9s5s/p/l0sQUkzcPYsJTENAWK5fCdHg3wG3Et7qXH48nwdEOm74nQ/St1p4aEXxGiVTBGbWGa7LTwieyuHDPYiHMgnS0hC2HyUpn5pwOJ5rLlnOZ7Mt1+wjwpz54QagWC62M79VA4gFwJy+io7T09VeT5ap69yRzhJ5dmGbN5g/Kxj3q7NRVduzCXMLmNEjUibYtTwyHLCv1GUcwLmVDMR9Qws5SbwgRn9ck3Fs8t+euTKuAr8IpM0/4u4D4WCYXyanPWKfbuGLiSSK2pNxFq6Ih878mQyY5J5x4VDwympsr4/BVvet2gfNUaJW/YSER2oIbmCFNx/jfCdvQN/EnPnTvJxWoivFxU8r0ScOczp4GjZ4wps8mAr33EzDdXdZ2VDSkv4TNh2TjgkR+JMAyT2US9eIqSTJzLMVAkZdqkEim5jFfTGCcXQgcSFw3kliIlj4D1p4qtz8BJTABiVoWljvly8717e34euLs5ze0Dv4CqP7EB+y6Nqv/t4g9hv2CnHqYpkD/NtdyCgWhr99b7z7FaQ+5AfcXT8AahfIDIMV6kJ9oU5sN/nOt2FECoyIv2pZMNOiYdS648ZWXr+OZDySdHe/RUg=
