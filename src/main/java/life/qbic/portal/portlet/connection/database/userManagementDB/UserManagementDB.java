@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import life.qbic.portal.Styles;
 import life.qbic.portal.Styles.NotificationType;
 import org.apache.logging.log4j.LogManager;
@@ -161,15 +163,15 @@ public class UserManagementDB {
 
   public String getOfferID(String projectCode) {
     Statement stmt = null;
-    String offerNumber = "";
-    String query = "SELECT offer_number " +
+    List<String> offerIDs = new ArrayList<>();
+    String query = "SELECT offer_id " +
         "FROM " + "facs_facility" + ".offers" +
         " WHERE " + "offer_project_reference" + " LIKE " + "'%" + projectCode + "%'";
     try {
       stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
       while (rs.next()) {
-        offerNumber = rs.getString("offer_number");
+        offerIDs.add(rs.getString("offer_id"));
       }
     } catch (NullPointerException e) {
       //nothing
@@ -185,7 +187,9 @@ public class UserManagementDB {
       }
     }
 
-    return offerNumber;
+    String csv = String.join(", ", offerIDs);
+
+    return csv;
   }
 
 
