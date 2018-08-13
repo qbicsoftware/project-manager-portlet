@@ -130,7 +130,7 @@ public class ProjectSheetPresenter {
   }
 
   private Label getProjectDetail() {
-    String pi, species, sampleTypes;
+    String pi, species, sampleTypes, offerID;
     int samples;
     try {
       pi = (String) currentItem.getItemProperty("investigatorName").getValue();
@@ -156,12 +156,19 @@ public class ProjectSheetPresenter {
       sampleTypes = "Unknown";
     }
 
+    try {
+      offerID = (String) currentItem.getItemProperty("offerID").getValue();
+    } catch (NullPointerException ex) {
+      offerID = "";
+    }
+
     Label label = new Label(
         "<ul>" +
             "  <li><b><font color=\"#007ae4\">PI: </b></font>" + pi + "</li>" +
             "  <li><b><font color=\"#007ae4\">Species: </b></font>" + species + "</li>" +
             "  <li><b><font color=\"#007ae4\">Samples: </b></font>" + samples + "</li>" +
             "  <li><b><font color=\"#007ae4\">Types: </b></font>" + sampleTypes + "</li>" +
+            "  <li><b><font color=\"#007ae4\">Offers: </b></font>" + offerID + "</li>" +
             "</ul> ",
         ContentMode.HTML);
     return label;
@@ -186,6 +193,7 @@ public class ProjectSheetPresenter {
     String projectSpecies = "Species," + currentItem.getItemProperty("species");
     String projectSamples = "Samples," + currentItem.getItemProperty("samples");
     String projectSampleTypes = "Sample Types," + currentItem.getItemProperty("sampleTypes");
+    String offerIDs = "Offers," + currentItem.getItemProperty("offerID");
     String projectRegisteredDate =
         "Project Registered," + currentItem.getItemProperty("projectRegisteredDate");
     String rawDataRegisteredDate =
@@ -209,6 +217,8 @@ public class ProjectSheetPresenter {
       bw.write(projectSamples);
       bw.newLine();
       bw.write(projectSampleTypes);
+      bw.newLine();
+      bw.write(offerIDs);
       bw.newLine();
       bw.write(projectRegisteredDate);
       bw.newLine();

@@ -166,7 +166,7 @@ public class ProjectContentModel {
   }
 
   private void writeSampleTypes(Object itemId, Project project) {
-    String sampleTypes = String.join(",", openBisConnection.getSampleTypesOfProject(project));
+    String sampleTypes = String.join("/", openBisConnection.getSampleTypesOfProject(project));
     tableContent.getContainerProperty(itemId, "sampleTypes")
         .setValue(sampleTypes);
   }
