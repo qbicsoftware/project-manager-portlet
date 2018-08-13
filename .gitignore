@@ -93,3 +93,8 @@ target/
 
 \.idea/project-manager-portlet\.iml
 /.idea/dataSources.xml
+
+.classpath
+.factorypath
+.project
+.settings
