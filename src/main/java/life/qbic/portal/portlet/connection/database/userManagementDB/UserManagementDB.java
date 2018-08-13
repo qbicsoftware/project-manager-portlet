@@ -187,7 +187,7 @@ public class UserManagementDB {
       }
     }
 
-    String csv = String.join(", ", offerIDs);
+    String csv = String.join(",", offerIDs);
 
     return csv;
   }
