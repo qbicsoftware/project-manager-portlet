@@ -7,8 +7,8 @@
              http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
 
   <portlet>
-    <description>Project manager portlett to view followed projects</description>
-    <portlet-name>project-manager-portlet</portlet-name>
+    <description>Project manager portlet to view followed projects</description>
+    <portlet-name>${project.artifactId}</portlet-name>
     <display-name>Project Manager Portlet</display-name>
 
     <portlet-class>com.vaadin.server.VaadinPortlet</portlet-class>
@@ -31,7 +31,7 @@
 
     <portlet-info>
       <title>Project Manager Portlet</title>
-      <short-title>Project manager portlett to view followed projects</short-title>
+      <short-title>Project manager portlet to view followed projects</short-title>
       <keywords>Vaadin 7, QBiC, Big Data, Bioinformatics</keywords>
     </portlet-info>
 
