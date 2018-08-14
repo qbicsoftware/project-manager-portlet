@@ -75,11 +75,14 @@ public class TimelineChartView extends Chart {
     timeLeftSeries.setPlotOptions(o);
     timeLeftSeries.setName("Time left");
 
+
     conf.getChart().setBackgroundColor(new SolidColor("#fafafa"));
-    conf.addSeries(timeLeftSeries);
-    conf.addSeries(unregisteredSeries);
     conf.addSeries(overdueSeries);
+    conf.addSeries(timeLeftSeries);
     conf.addSeries(intimeSeries);
+    conf.addSeries(unregisteredSeries);
+
+    conf.getLegend().setReversed(true);
 
     setImmediate(true);
     drawChart(conf);
