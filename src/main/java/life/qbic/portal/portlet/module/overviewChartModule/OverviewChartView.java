@@ -37,13 +37,15 @@ public class OverviewChartView extends Chart {
         .setColors(new SolidColor("#ff9a00"), new SolidColor("#26A65B"), new SolidColor("#c20047"));
     plotOptions.setSize("110px");
     plotOptions.setCursor(Cursor.POINTER);
-    plotOptions.setAllowPointSelect(true);
     conf.setPlotOptions(plotOptions);
     conf.setTitle("Status");
     conf.getChart().setBackgroundColor(new SolidColor("#fafafa"));
 
     series.setName("projects");
     conf.setSeries(series);
+
+    conf.getLegend().setEnabled(false);
+    conf.getLegend()
     this.setImmediate(true);
     this.drawChart(conf);
   }

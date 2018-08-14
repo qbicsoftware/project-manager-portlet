@@ -274,7 +274,7 @@ public class ProjectContentModel {
         File projectFile = File.createTempFile(fileName, ".csv");
         FileWriter fw = new FileWriter(projectFile);
         BufferedWriter bw = new BufferedWriter(fw);
-        String header = "Project,Status,Progress,PI,Species,Samples,Sample Types,Project Registered,Raw Data Registered,Data Analyzed,Offer ID,Invoice\n";
+        String header = "Project,Status,Progress,PI,Species,Samples,Sample Types,Project Registered,Raw Data Registered,Results Registered,Offer ID,Invoice\n";
         bw.write(header);
         for (Object itemId : itemIds) {
           String projectName = tableContent.getContainerProperty(itemId, "projectID").getValue()

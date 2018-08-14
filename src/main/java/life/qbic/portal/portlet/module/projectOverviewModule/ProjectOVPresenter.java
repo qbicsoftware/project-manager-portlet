@@ -128,9 +128,6 @@ public class ProjectOVPresenter {
     });
 
     renderTable();
-    overviewChartPresenter.getChart().addPointClickListener((PointClickListener) event -> {
-      setFilter("projectTime", overviewChartPresenter.getChart().getDataSeriesObject(event));
-    });
     exportButton = contentModel.exportProjects();
   }
 
