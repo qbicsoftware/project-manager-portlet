@@ -145,6 +145,8 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().addColumn("projectID").setHeaderCaption("Project");
     overViewModule.getOverviewGrid().addColumn("projectTime").setHeaderCaption("Status");
     overViewModule.getOverviewGrid().addColumn("projectStatus").setHeaderCaption("Progress");
+    overViewModule.getOverviewGrid().addColumn("offerID").setHeaderCaption("Offer");
+
     //overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
     overViewModule.getOverviewGrid().addColumn("investigatorName")
         .setHeaderCaption("Principal Investigator");
@@ -157,7 +159,6 @@ public class ProjectOVPresenter {
         .setHeaderCaption("Raw Data Registered");
     overViewModule.getOverviewGrid().addColumn("dataAnalyzedDate")
         .setHeaderCaption("Data Analyzed");
-    overViewModule.getOverviewGrid().addColumn("offerID").setHeaderCaption("Offer");
     overViewModule.getOverviewGrid().addColumn("invoice").setHeaderCaption("Invoice");
 
     overViewModule.getOverviewGrid().getColumn("projectID").setEditable(false);
@@ -315,10 +316,10 @@ public class ProjectOVPresenter {
     Grid.HeaderRow firstHeaderRow = grid.prependHeaderRow();
     // "projectStatus removed (#25)
     firstHeaderRow
-        .join("projectID", "projectTime", "projectStatus", "investigatorName", "species", "samples",
+        .join("projectID", "projectTime", "projectStatus", "offerID", "investigatorName", "species", "samples",
             "sampleTypes",
             "projectRegisteredDate",
-            "rawDataRegistered", "dataAnalyzedDate", "offerID", "invoice");
+            "rawDataRegistered", "dataAnalyzedDate", "invoice");
     buttonLayout = new HorizontalLayout();
     buttonLayout.setSpacing(true);
     firstHeaderRow.getCell("projectID").setComponent(buttonLayout);
