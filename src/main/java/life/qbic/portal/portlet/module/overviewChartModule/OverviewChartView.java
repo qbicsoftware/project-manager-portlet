@@ -45,7 +45,6 @@ public class OverviewChartView extends Chart {
     conf.setSeries(series);
 
     conf.getLegend().setEnabled(false);
-    conf.getLegend()
     this.setImmediate(true);
     this.drawChart(conf);
   }
