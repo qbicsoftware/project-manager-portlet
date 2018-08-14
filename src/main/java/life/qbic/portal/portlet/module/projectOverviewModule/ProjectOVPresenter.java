@@ -170,6 +170,8 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().getColumn("offerID").setEditable(false);
     overViewModule.getOverviewGrid().getColumn("invoice").setEditable(true);
 
+    overViewModule.getOverviewGrid().setColumnReorderingAllowed(true);
+
 //    overViewModule.getOverviewGrid().setRowStyleGenerator(rowRef -> {// Java 8
 //      if (rowRef.getItem().getItemProperty("projectTime").getValue().equals("projectTime")) {
 //        return "overdue";
@@ -257,12 +259,10 @@ public class ProjectOVPresenter {
     }
 
     for (Column column : overViewModule.getOverviewGrid().getColumns()) {
-      if (column.getHeaderCaption().equals("Principal Investigator") ||
-          column.getHeaderCaption().equals("Offer") ||
-          column.getHeaderCaption().equals("Invoice")) {
+      if (column.getHeaderCaption().equals("Principal Investigator")) {
         column.setWidth(230);
       } else if (column.getHeaderCaption().equals("Project") || column.getHeaderCaption()
-          .equals("Samples")) {
+          .equals("Samples") || column.getHeaderCaption().equals("Offer")) {
         column.setWidth(110);
       } else {
         column.setWidth(180);
