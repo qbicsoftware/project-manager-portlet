@@ -128,9 +128,6 @@ public class ProjectOVPresenter {
     });
 
     renderTable();
-    overviewChartPresenter.getChart().addPointClickListener((PointClickListener) event -> {
-      setFilter("projectTime", overviewChartPresenter.getChart().getDataSeriesObject(event));
-    });
     exportButton = contentModel.exportProjects();
   }
 
@@ -145,6 +142,8 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().addColumn("projectID").setHeaderCaption("Project");
     overViewModule.getOverviewGrid().addColumn("projectTime").setHeaderCaption("Status");
     overViewModule.getOverviewGrid().addColumn("projectStatus").setHeaderCaption("Progress");
+    overViewModule.getOverviewGrid().addColumn("offerID").setHeaderCaption("Offer");
+
     //overViewModule.getOverviewGrid().getColumn("projectRegisteredDate").
     overViewModule.getOverviewGrid().addColumn("investigatorName")
         .setHeaderCaption("Principal Investigator");
@@ -156,8 +155,7 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().addColumn("rawDataRegistered")
         .setHeaderCaption("Raw Data Registered");
     overViewModule.getOverviewGrid().addColumn("dataAnalyzedDate")
-        .setHeaderCaption("Data Analyzed");
-    overViewModule.getOverviewGrid().addColumn("offerID").setHeaderCaption("Offer");
+        .setHeaderCaption("Results Registered");
     overViewModule.getOverviewGrid().addColumn("invoice").setHeaderCaption("Invoice");
 
     overViewModule.getOverviewGrid().getColumn("projectID").setEditable(false);
@@ -171,6 +169,8 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().getColumn("projectTime").setEditable(false);
     overViewModule.getOverviewGrid().getColumn("offerID").setEditable(false);
     overViewModule.getOverviewGrid().getColumn("invoice").setEditable(true);
+
+    overViewModule.getOverviewGrid().setColumnReorderingAllowed(true);
 
 //    overViewModule.getOverviewGrid().setRowStyleGenerator(rowRef -> {// Java 8
 //      if (rowRef.getItem().getItemProperty("projectTime").getValue().equals("projectTime")) {
@@ -259,12 +259,10 @@ public class ProjectOVPresenter {
     }
 
     for (Column column : overViewModule.getOverviewGrid().getColumns()) {
-      if (column.getHeaderCaption().equals("Principal Investigator") ||
-          column.getHeaderCaption().equals("Offer") ||
-          column.getHeaderCaption().equals("Invoice")) {
+      if (column.getHeaderCaption().equals("Principal Investigator")) {
         column.setWidth(230);
       } else if (column.getHeaderCaption().equals("Project") || column.getHeaderCaption()
-          .equals("Samples")) {
+          .equals("Samples") || column.getHeaderCaption().equals("Offer")) {
         column.setWidth(110);
       } else {
         column.setWidth(180);
@@ -315,10 +313,10 @@ public class ProjectOVPresenter {
     Grid.HeaderRow firstHeaderRow = grid.prependHeaderRow();
     // "projectStatus removed (#25)
     firstHeaderRow
-        .join("projectID", "projectTime", "projectStatus", "investigatorName", "species", "samples",
+        .join("projectID", "projectTime", "projectStatus", "offerID", "investigatorName", "species", "samples",
             "sampleTypes",
             "projectRegisteredDate",
-            "rawDataRegistered", "dataAnalyzedDate", "offerID", "invoice");
+            "rawDataRegistered", "dataAnalyzedDate", "invoice");
     buttonLayout = new HorizontalLayout();
     buttonLayout.setSpacing(true);
     firstHeaderRow.getCell("projectID").setComponent(buttonLayout);

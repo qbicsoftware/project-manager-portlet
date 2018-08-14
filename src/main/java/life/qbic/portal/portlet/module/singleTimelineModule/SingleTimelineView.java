@@ -66,10 +66,12 @@ public class SingleTimelineView extends Chart {
     potentialtimeSeries.setName("Time left");
 
     conf.getChart().setBackgroundColor(new SolidColor("#ffffff"));
-    conf.addSeries(potentialtimeSeries);
-    conf.addSeries(unregisteredSeries);
     conf.addSeries(overdueSeries);
+    conf.addSeries(potentialtimeSeries);
     conf.addSeries(intimeSeries);
+    conf.addSeries(unregisteredSeries);
+
+    conf.getLegend().setReversed(true);
 
     this.drawChart();
   }

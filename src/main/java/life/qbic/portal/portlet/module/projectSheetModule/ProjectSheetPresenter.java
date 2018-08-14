@@ -198,7 +198,7 @@ public class ProjectSheetPresenter {
         "Project Registered," + currentItem.getItemProperty("projectRegisteredDate");
     String rawDataRegisteredDate =
         "Raw Data Registered," + currentItem.getItemProperty("rawDataRegistered");
-    String dataAnalyzedDate = "Data Analyzed," + currentItem.getItemProperty("dataAnalyzedDate");
+    String dataAnalyzedDate = "Results Registered," + currentItem.getItemProperty("dataAnalyzedDate");
 
     try {
       File projectFile = File.createTempFile(fileName, ".csv");
