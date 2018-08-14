@@ -158,7 +158,7 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().addColumn("rawDataRegistered")
         .setHeaderCaption("Raw Data Registered");
     overViewModule.getOverviewGrid().addColumn("dataAnalyzedDate")
-        .setHeaderCaption("Data Analyzed");
+        .setHeaderCaption("Results Registered");
     overViewModule.getOverviewGrid().addColumn("invoice").setHeaderCaption("Invoice");
 
     overViewModule.getOverviewGrid().getColumn("projectID").setEditable(false);
