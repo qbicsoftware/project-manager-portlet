@@ -60,13 +60,23 @@ public class OpenBisConnection {
   public List<Sample> getSamplesOfProject(Project project) {
     SampleSearchCriteria sampleSearchCriteria = new SampleSearchCriteria();
     sampleSearchCriteria.withExperiment().withProject().withCode().thatEquals(project.getCode());
+    sampleSearchCriteria.withType().withCode().thatEquals("Q_TEST_SAMPLE");
     SampleFetchOptions fetchOptions = new SampleFetchOptions();
     fetchOptions.withType();
     fetchOptions.withProperties();
+    fetchOptions.withChildrenUsing(fetchOptions);
     SearchResult<Sample> samples = app
         .searchSamples(sessionToken, sampleSearchCriteria, fetchOptions);
 
-    return samples.getObjects();
+    List<Sample> measuredSamples = new ArrayList<>();
+    for (Sample sample : samples.getObjects()){
+      for (Sample child : sample.getChildren()) {
+        if (!child.getType().equals("Q_TEST_SAMPLE")){
+          measuredSamples.add(child);
+        }
+      }
+    }
+    return measuredSamples;
   }
 
   public String getSpeciesOfProject(Project project) {
