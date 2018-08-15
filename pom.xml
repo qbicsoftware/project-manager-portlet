@@ -19,7 +19,7 @@
   <!-- we only need to tell maven where to find our parent pom and other QBiC dependencies -->
   <repositories>
     <repository>
-      <releases>git status
+      <releases>
         <enabled>false</enabled>
       </releases>
       <snapshots>
