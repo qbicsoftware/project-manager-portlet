@@ -205,7 +205,7 @@ public class OpenBisConnection {
             new VocabularyTermFetchOptions());
     for (VocabularyTerm vocabularyTerm : vocabularyTermSearchResult.getObjects()) {
       if (vocabularyTerm.getCode().equals(ncbi_code)) {
-        taxonomy = vocabularyTerm.getDescription();
+        taxonomy = vocabularyTerm.getLabel();
       }
     }
     return taxonomy;
