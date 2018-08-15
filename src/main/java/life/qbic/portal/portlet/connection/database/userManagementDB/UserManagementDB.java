@@ -165,7 +165,7 @@ public class UserManagementDB {
     Statement stmt = null;
     List<String> offerIDs = new ArrayList<>();
     String query = "SELECT offer_id " +
-        "FROM " + "facs_facility" + ".offers" +
+        "FROM " + database + ".offers" +
         " WHERE " + "offer_project_reference" + " LIKE " + "'%" + projectCode + "%'";
     try {
       stmt = conn.createStatement();
