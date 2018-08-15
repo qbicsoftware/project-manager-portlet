@@ -11,7 +11,7 @@
   </parent>
   <groupId>life.qbic</groupId>
   <artifactId>project-manager-portlet</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
   <name>Project Manager Portlet</name>
   <url>http://github.com/qbicsoftware/project-manager-portlet</url>
   <description>Project manager portlet to view followed projects</description>
@@ -19,7 +19,7 @@
   <!-- we only need to tell maven where to find our parent pom and other QBiC dependencies -->
   <repositories>
     <repository>
-      <releases>
+      <releases>git status
         <enabled>false</enabled>
       </releases>
       <snapshots>
