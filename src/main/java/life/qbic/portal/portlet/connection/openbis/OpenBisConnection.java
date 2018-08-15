@@ -95,7 +95,7 @@ public class OpenBisConnection {
     }
 
     if (species == null || species.equals("")) {
-      species = "unkown";
+      species = "unknown";
     }
     return species;
 
@@ -197,7 +197,7 @@ public class OpenBisConnection {
   }
 
   public String getTaxonomy(String ncbi_code) {
-    String taxonomy = "Unknown";
+    String taxonomy = "unknown";
     VocabularyTermSearchCriteria vocabularyTermSearchCriteria = new VocabularyTermSearchCriteria();
     vocabularyTermSearchCriteria.withCode().thatEquals(ncbi_code);
     SearchResult<VocabularyTerm> vocabularyTermSearchResult = app
