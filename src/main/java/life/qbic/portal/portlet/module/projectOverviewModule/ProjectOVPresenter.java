@@ -171,6 +171,8 @@ public class ProjectOVPresenter {
     overViewModule.getOverviewGrid().getColumn("invoice").setEditable(true);
 
     overViewModule.getOverviewGrid().setColumnReorderingAllowed(true);
+    //Allow column hiding
+    overViewModule.getOverviewGrid().getColumns().forEach(col -> col.setHidable(true));
 
 //    overViewModule.getOverviewGrid().setRowStyleGenerator(rowRef -> {// Java 8
 //      if (rowRef.getItem().getItemProperty("projectTime").getValue().equals("projectTime")) {
