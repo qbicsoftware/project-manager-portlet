@@ -66,8 +66,8 @@ public class ProjectManagerUI extends QBiCPortletUI {
     ProjectFollowerModel followerModel = new ProjectFollowerModel(
         connectionHandler.getProjectDatabase());
     ProjectFollowerView followerView = new ProjectFollowerViewImpl()
-        .setSpaceCaption("Institution")
-        .setProjectCaption("Project")
+        .setSpaceCaption("Project")
+        .setProjectCaption("Sub-Project")
         .build();
     ProjectFollowerPresenter followerPresenter = new ProjectFollowerPresenter(followerView,
         followerModel, connectionHandler.getOpenBisConnection());
