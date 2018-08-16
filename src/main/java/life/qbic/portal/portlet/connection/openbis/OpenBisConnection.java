@@ -145,7 +145,6 @@ public class OpenBisConnection {
   public Date getFirstAnalyzedDate(Project project) {
     SampleSearchCriteria sampleSearchCriteria = new SampleSearchCriteria();
     sampleSearchCriteria.withExperiment().withProject().withCode().thatEquals(project.getCode());
-    sampleSearchCriteria.withCode().thatEndsWith("000");
     SampleFetchOptions fetchOptions = new SampleFetchOptions();
     fetchOptions.withDataSets().withType();
     SearchResult<Sample> samples = app
@@ -155,9 +154,14 @@ public class OpenBisConnection {
     for (int i = 0; i < samples.getObjects().size(); i++) {
       Sample rawDataSample = samples.getObjects().get(i);
       for (DataSet dataSet : rawDataSample.getDataSets()) {
+        System.out.println("Code: " + rawDataSample.getCode());
+        System.out.println("Type: " + dataSet.getType());
+        if (rawDataSample.getCode().startsWith("Q") && rawDataSample.getCode()
+            .endsWith("000") && dataSet.getType().getCode().contains("ATTACHEMENT")) {
           datesAnalyzed.add(dataSet.getRegistrationDate());
         }
       }
+    }
 
     Date firstAnalyzed = null;
     if (!datesAnalyzed.isEmpty()) {
