@@ -169,7 +169,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     statisticsLayout.addComponent(statsLayout);
     statisticsLayout.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
     statisticsLayout.setSizeFull();
-    statisticsLayout.setMargin(new MarginInfo(false, true, false, false));
+    statisticsLayout.setMargin(new MarginInfo(false, true, false, true));
     statisticsLayout.setSpacing(false);
 
     projectsStatsPresenter.update();
