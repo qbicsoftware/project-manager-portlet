@@ -1,5 +1,6 @@
 package life.qbic.portal.portlet.module.projectFollowerModule;
 
+import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
@@ -80,6 +81,7 @@ public class ProjectFollowerViewImpl implements ProjectFollowerView {
     this.descriptionField.setValue("No description available.");
 
     HorizontalLayout leftContainer = new HorizontalLayout();
+    spaceBox.setFilteringMode(FilteringMode.CONTAINS);
     leftContainer.addComponent(spaceBox);
 
     HorizontalLayout rightContainer = new HorizontalLayout();

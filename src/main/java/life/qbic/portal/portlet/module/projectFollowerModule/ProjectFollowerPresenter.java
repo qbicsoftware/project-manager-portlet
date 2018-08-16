@@ -2,6 +2,7 @@ package life.qbic.portal.portlet.module.projectFollowerModule;
 
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.ObjectProperty;
+import com.vaadin.shared.ui.combobox.FilteringMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
