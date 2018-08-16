@@ -95,7 +95,7 @@ public class OpenBisConnection {
     }
 
     if (species == null || species.equals("")) {
-      species = "unkown";
+      species = "unknown";
     }
     return species;
 
@@ -147,6 +147,7 @@ public class OpenBisConnection {
     sampleSearchCriteria.withExperiment().withProject().withCode().thatEquals(project.getCode());
     SampleFetchOptions fetchOptions = new SampleFetchOptions();
     fetchOptions.withDataSets().withType();
+    fetchOptions.withDataSets().withProperties();
     SearchResult<Sample> samples = app
         .searchSamples(sessionToken, sampleSearchCriteria, fetchOptions);
 
@@ -154,8 +155,8 @@ public class OpenBisConnection {
     for (int i = 0; i < samples.getObjects().size(); i++) {
       Sample rawDataSample = samples.getObjects().get(i);
       for (DataSet dataSet : rawDataSample.getDataSets()) {
-        if (dataSet.getType().getCode().contains("RESULT") || dataSet.getType().getCode()
-            .contains("result")) {
+        if (rawDataSample.getCode().startsWith("Q") && rawDataSample.getCode()
+            .endsWith("000") && dataSet.getType().getCode().equals("Q_PROJECT_DATA") && dataSet.getProperties().get("Q_ATTACHMENT_TYPE").equals("RESULT")) {
           datesAnalyzed.add(dataSet.getRegistrationDate());
         }
       }
@@ -197,7 +198,7 @@ public class OpenBisConnection {
   }
 
   public String getTaxonomy(String ncbi_code) {
-    String taxonomy = "Unknown";
+    String taxonomy = "unknown";
     VocabularyTermSearchCriteria vocabularyTermSearchCriteria = new VocabularyTermSearchCriteria();
     vocabularyTermSearchCriteria.withCode().thatEquals(ncbi_code);
     SearchResult<VocabularyTerm> vocabularyTermSearchResult = app
@@ -205,7 +206,7 @@ public class OpenBisConnection {
             new VocabularyTermFetchOptions());
     for (VocabularyTerm vocabularyTerm : vocabularyTermSearchResult.getObjects()) {
       if (vocabularyTerm.getCode().equals(ncbi_code)) {
-        taxonomy = vocabularyTerm.getDescription();
+        taxonomy = vocabularyTerm.getLabel();
       }
     }
     return taxonomy;
