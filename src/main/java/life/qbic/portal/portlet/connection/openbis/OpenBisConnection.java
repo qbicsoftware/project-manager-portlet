@@ -147,6 +147,7 @@ public class OpenBisConnection {
     sampleSearchCriteria.withExperiment().withProject().withCode().thatEquals(project.getCode());
     SampleFetchOptions fetchOptions = new SampleFetchOptions();
     fetchOptions.withDataSets().withType();
+    fetchOptions.withDataSets().withProperties();
     SearchResult<Sample> samples = app
         .searchSamples(sessionToken, sampleSearchCriteria, fetchOptions);
 
@@ -154,10 +155,8 @@ public class OpenBisConnection {
     for (int i = 0; i < samples.getObjects().size(); i++) {
       Sample rawDataSample = samples.getObjects().get(i);
       for (DataSet dataSet : rawDataSample.getDataSets()) {
-        System.out.println("Code: " + rawDataSample.getCode());
-        System.out.println("Type: " + dataSet.getType());
         if (rawDataSample.getCode().startsWith("Q") && rawDataSample.getCode()
-            .endsWith("000") && dataSet.getType().getCode().contains("ATTACHEMENT")) {
+            .endsWith("000") && dataSet.getType().getCode().equals("Q_PROJECT_DATA") && dataSet.getProperties().get("Q_ATTACHMENT_TYPE").equals("RESULT")) {
           datesAnalyzed.add(dataSet.getRegistrationDate());
         }
       }
