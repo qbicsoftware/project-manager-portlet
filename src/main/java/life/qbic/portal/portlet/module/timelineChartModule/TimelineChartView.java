@@ -27,6 +27,7 @@ public class TimelineChartView extends Chart {
     conf.getChart().setInverted(true);
 
     XAxis xAxis = new XAxis();
+    xAxis.setOpposite(true);
     conf.addxAxis(xAxis);
 
     YAxis yAxis = new YAxis();
