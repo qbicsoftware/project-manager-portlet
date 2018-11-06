@@ -9,7 +9,9 @@ import com.vaadin.addon.charts.model.Cursor;
 import com.vaadin.addon.charts.model.DataLabels;
 import com.vaadin.addon.charts.model.DataSeries;
 import com.vaadin.addon.charts.model.PlotOptionsPie;
+import com.vaadin.addon.charts.model.Tooltip;
 import com.vaadin.addon.charts.model.style.SolidColor;
+import com.vaadin.addon.charts.model.style.Style;
 
 public class OverviewChartView extends Chart {
 
@@ -36,7 +38,6 @@ public class OverviewChartView extends Chart {
     plotOptions
         .setColors(new SolidColor("#ff9a00"), new SolidColor("#26A65B"), new SolidColor("#c20047"));
     plotOptions.setSize("110px");
-    plotOptions.setCursor(Cursor.POINTER);
     conf.setPlotOptions(plotOptions);
     conf.setTitle("Status");
     conf.getChart().setBackgroundColor(new SolidColor("#fafafa"));

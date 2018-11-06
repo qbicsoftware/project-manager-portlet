@@ -172,6 +172,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     statisticsLayout.setMargin(new MarginInfo(false, true, false, true));
     statisticsLayout.setSpacing(false);
 
+    LOG.info("Update project stats");
     projectsStatsPresenter.update();
 
     mainContent.addComponent(statisticsLayout);
@@ -185,6 +186,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     mainFrame.setStyleName("mainpage");
 
     // Init Master Presenter
+    LOG.info("Init Master presenter");
     final MasterPresenter masterPresenter = new MasterPresenter(projectOVPresenter,
         projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter,
         projectsStatsPresenter, timelineChartPresenter, model);
