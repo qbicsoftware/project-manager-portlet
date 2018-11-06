@@ -36,7 +36,6 @@ public class OverviewChartView extends Chart {
     plotOptions
         .setColors(new SolidColor("#ff9a00"), new SolidColor("#26A65B"), new SolidColor("#c20047"));
     plotOptions.setSize("110px");
-    plotOptions.setCursor(Cursor.POINTER);
     conf.setPlotOptions(plotOptions);
     conf.setTitle("Status");
     conf.getChart().setBackgroundColor(new SolidColor("#fafafa"));

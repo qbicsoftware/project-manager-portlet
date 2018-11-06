@@ -11,6 +11,7 @@ import com.vaadin.addon.charts.model.Tooltip;
 import com.vaadin.addon.charts.model.XAxis;
 import com.vaadin.addon.charts.model.YAxis;
 import com.vaadin.addon.charts.model.style.SolidColor;
+import com.vaadin.addon.charts.model.style.Style;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -41,12 +42,10 @@ public class TimelineChartView extends Chart {
     this.setSizeFull();
 
     Tooltip tooltip = new Tooltip();
-    tooltip.setFormatter(
-        "this.dataseries.name +': '+ Highcharts.dateFormat('YYYY/mm/dd', this.point.low) + ' - ' + Highcharts.dateFormat('YYYY/mm/dd', this.point.high)");
+    tooltip.setFormatter("'<b> '+  this.point.category + '</b>'");
     conf.setTooltip(tooltip);
 
     PlotOptionsColumnrange columnRange = new PlotOptionsColumnrange();
-    columnRange.setCursor(Cursor.POINTER);
     conf.getChart().setBackgroundColor(new SolidColor("#fafafa"));
     columnRange.setGrouping(false);
 
@@ -84,6 +83,16 @@ public class TimelineChartView extends Chart {
     conf.addSeries(unregisteredSeries);
 
     conf.getLegend().setReversed(true);
+    conf.getLegend().setEnabled(false);
+
+    Style style = new Style();
+    style.setFontSize("10");
+    xAxis.getLabels().setPadding(0.1);
+    xAxis.getLabels().setStep(1);
+    xAxis.getLabels().setReserveSpace(true);
+    xAxis.getLabels().setStyle(style);
+
+    yAxis.getLabels().setStyle(style);
 
     setImmediate(true);
     drawChart(conf);
