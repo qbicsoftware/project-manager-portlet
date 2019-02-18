@@ -2,6 +2,7 @@ package life.qbic.portal.portlet.connection;
 
 import ch.ethz.sis.openbis.generic.asapi.v3.IApplicationServerApi;
 import ch.systemsx.cisd.common.spring.HttpInvokerUtils;
+import com.liferay.util.portlet.PortletProps;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
@@ -55,8 +56,8 @@ public class ConnectionHandler {
           openBisUrl + IApplicationServerApi.SERVICE_URL,
           10000);
 
-      String sessionToken = "";
-      sessionToken = app.loginAs(openBisUser, openBisPw, userID);
+      // TODO: login/loginAs? loginAs seems to return a null sessionToken
+      String sessionToken = app.login(openBisUser, openBisPw);
       openBisConnection = new OpenBisConnection(app, sessionToken);
       LOG.info("Connection to openBIS established.");
 
@@ -70,12 +71,19 @@ public class ConnectionHandler {
 
   public void setCredentials() {
     LOG.info("Set credentials");
+    LOG.info("Using configuration manager {}", conf.getClass().getName());
+    LOG.info("System.getProperty(\"liferay.home\") -> {}", System.getProperty("liferay.home"));
+    LOG.info("PortletProps.get(\"liferay.home\") -> {}", PortletProps.get("liferay.home"));
+
     try {
       mysqlUser = conf.getMysqlUser();
+      LOG.info("mysql user = {}", mysqlUser);
       mysqlPW = conf.getMysqlPass();
       hostname = conf.getMsqlHost();
+      LOG.info("mysql host = {}", hostname);
       port = conf.getMysqlPort();
       openBisUser = conf.getDataSourceUser();
+      LOG.info("openBIS user = {}", openBisUser);
       openBisPw = conf.getDataSourcePassword();
       openBisUrl = conf.getDataSourceApiUrl();
       userID = PortalUtils.getUser().getScreenName();
@@ -83,7 +91,7 @@ public class ConnectionHandler {
         throw new Exception();
       }
     } catch (Exception e) {
-      LOG.info("No Liferay Portlet found. Get user and passwords from local file.");
+      LOG.info("No Liferay Portlet found. Getting user and passwords from local file {}", propertyFilePath);
       getCredentials(propertyFilePath);
     }
   }
@@ -91,12 +99,7 @@ public class ConnectionHandler {
 
   private void getCredentials(String propertyFilePath) {
     Properties prop = new Properties();
-    InputStream input = null;
-
-    try {
-
-      input = new FileInputStream(propertyFilePath);
-
+    try (final InputStream input = new FileInputStream(propertyFilePath)) {
       // load a properties file
       prop.load(input);
 
@@ -111,15 +114,7 @@ public class ConnectionHandler {
       port = prop.getProperty("mysql.port");
 
     } catch (IOException ex) {
-      LOG.error("Could not find the property file. ");
-    } finally {
-      if (input != null) {
-        try {
-          input.close();
-        } catch (IOException e) {
-          LOG.error("Could not find the property file");
-        }
-      }
+      throw new RuntimeException("Could not find the property file.", ex);
     }
   }
 

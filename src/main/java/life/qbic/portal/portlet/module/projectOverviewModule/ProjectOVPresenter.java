@@ -174,20 +174,6 @@ public class ProjectOVPresenter {
     //Allow column hiding
     overViewModule.getOverviewGrid().getColumns().forEach(col -> col.setHidable(true));
 
-//    overViewModule.getOverviewGrid().setRowStyleGenerator(rowRef -> {// Java 8
-//      if (rowRef.getItem().getItemProperty("projectTime").getValue().equals("projectTime")) {
-//        return "overdue";
-//      }
-//      else if (rowRef.getItem().getItemProperty("projectTime").getValue().equals("in time")) {
-//        return "intime";
-//      }
-//      else if (rowRef.getItem().getItemProperty("projectTime").getValue().equals("unregistered")) {
-//        return "unregistered";
-//      } else {
-//        return null;
-//      }
-//    });
-
     overViewModule.getOverviewGrid().setCellStyleGenerator(cellRef -> {// Java 8
       if (cellRef.getPropertyId().equals("projectTime") && cellRef.getItem()
           .getItemProperty("projectTime").getValue().equals("overdue")) {
