@@ -79,7 +79,7 @@ public class ConnectionHandler {
       mysqlUser = conf.getMysqlUser();
       LOG.info("mysql user = {}", mysqlUser);
       mysqlPW = conf.getMysqlPass();
-      hostname = conf.getMsqlHost();
+      hostname = conf.getMysqlHost();
       LOG.info("mysql host = {}", hostname);
       port = conf.getMysqlPort();
       openBisUser = conf.getDataSourceUser();
