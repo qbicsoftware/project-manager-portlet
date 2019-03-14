@@ -75,22 +75,18 @@ public class ConnectionHandler {
     LOG.info("System.getProperty(\"liferay.home\") -> {}", System.getProperty("liferay.home"));
     LOG.info("PortletProps.get(\"liferay.home\") -> {}", PortletProps.get("liferay.home"));
 
-    try {
-      mysqlUser = conf.getMysqlUser();
-      LOG.info("mysql user = {}", mysqlUser);
-      mysqlPW = conf.getMysqlPass();
-      hostname = conf.getMysqlHost();
-      LOG.info("mysql host = {}", hostname);
-      port = conf.getMysqlPort();
-      openBisUser = conf.getDataSourceUser();
-      LOG.info("openBIS user = {}", openBisUser);
-      openBisPw = conf.getDataSourcePassword();
-      openBisUrl = conf.getDataSourceApiUrl();
-      userID = PortalUtils.getUser().getScreenName();
-      if (mysqlUser == null || openBisUser == null) {
-        throw new Exception();
-      }
-    } catch (Exception e) {
+    mysqlUser = conf.getMysqlUser();
+    LOG.info("mysql user = {}", mysqlUser);
+    mysqlPW = conf.getMysqlPass();
+    hostname = conf.getMysqlHost();
+    LOG.info("mysql host = {}", hostname);
+    port = conf.getMysqlPort();
+    openBisUser = conf.getDataSourceUser();
+    LOG.info("openBIS user = {}", openBisUser);
+    openBisPw = conf.getDataSourcePassword();
+    openBisUrl = conf.getDataSourceApiUrl();
+    userID = PortalUtils.getNonNullScreenName();
+    if (mysqlUser == null || openBisUser == null) {
       LOG.info("No Liferay Portlet found. Getting user and passwords from local file {}", propertyFilePath);
       getCredentials(propertyFilePath);
     }
