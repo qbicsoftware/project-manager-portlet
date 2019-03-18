@@ -1,6 +1,7 @@
 package life.qbic.portal.portlet.module.timelineChartModule;
 
 import com.vaadin.addon.charts.model.DataSeriesItem;
+import com.vaadin.addon.charts.model.style.FontWeight;
 import com.vaadin.addon.charts.model.style.Style;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import java.util.Calendar;
@@ -40,12 +41,21 @@ public class TimelineChartPresenter {
     view.getOverdueSeries().clear();
     view.getTimeLeftSeries().clear();
 
-    Style style = new Style();
-    style.setFontSize("10");
-    view.getConf().getxAxis().getLabels().setPadding(0.1);
-    view.getConf().getxAxis().getLabels().setStep(1);
-    view.getConf().getxAxis().getLabels().setReserveSpace(true);
-    view.getConf().getxAxis().getLabels().setStyle(style);
+    if (model.getFollowingProjects().size() >= 10) {
+      Style style = new Style();
+      style.setFontSize("10");
+      view.getConf().getxAxis().getLabels().setPadding(0.1);
+      view.getConf().getxAxis().getLabels().setStep(1);
+      view.getConf().getxAxis().getLabels().setReserveSpace(true);
+      view.getConf().getxAxis().getLabels().setStyle(style);
+    } else {
+      Style style = new Style();
+      style.setFontSize("15");
+      view.getConf().getxAxis().getLabels().setPadding(0.1);
+      view.getConf().getxAxis().getLabels().setReserveSpace(true);
+      view.getConf().getxAxis().getLabels().setStep(1);
+      view.getConf().getxAxis().getLabels().setStyle(style);
+    }
 
     Collection<?> itemIds = tableContent.getItemIds();
     for (Object itemId : itemIds) {
@@ -66,6 +76,7 @@ public class TimelineChartPresenter {
 
 
     }
+
     view.drawChart(view.getConf());
   }
 

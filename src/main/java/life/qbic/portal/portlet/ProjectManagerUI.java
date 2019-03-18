@@ -32,6 +32,9 @@ import life.qbic.portal.portlet.module.projectsStatsModule.ProjectsStatsViewImpl
 import life.qbic.portal.portlet.module.timelineChartModule.TimelineChartPresenter;
 import life.qbic.portal.portlet.module.timelineChartModule.TimelineChartView;
 import life.qbic.portal.portlet.project.ProjectContentModel;
+import life.qbic.portal.utils.ConfigurationManager;
+import life.qbic.portal.utils.ConfigurationManagerFactory;
+import life.qbic.portal.utils.PortalUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.vaadin.sliderpanel.SliderPanel;
@@ -54,6 +57,15 @@ public class ProjectManagerUI extends QBiCPortletUI {
   @Override
   protected Layout getPortletContent(final VaadinRequest request) {
     LOG.info("Project-Manager started.");
+
+    // check if we are allowed to display content to unauthenticated users
+    if (PortalUtils.isLiferayPortlet() && PortalUtils.getUser() == null) {
+      final ConfigurationManager configurationManager = ConfigurationManagerFactory.getInstance();
+      if (!configurationManager.isAllowUnauthenticatedAccess("projectmanager")) {
+        // display a "please log in" message
+        return PortalUtils.buildNotLoggedInLayout();
+      }
+    }
 
     // Init Filter
     ProjectFilter projectFilter = new ProjectFilter();
@@ -172,6 +184,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     statisticsLayout.setMargin(new MarginInfo(false, true, false, true));
     statisticsLayout.setSpacing(false);
 
+    LOG.info("Update project stats");
     projectsStatsPresenter.update();
 
     mainContent.addComponent(statisticsLayout);
@@ -185,6 +198,7 @@ public class ProjectManagerUI extends QBiCPortletUI {
     mainFrame.setStyleName("mainpage");
 
     // Init Master Presenter
+    LOG.info("Init Master presenter");
     final MasterPresenter masterPresenter = new MasterPresenter(projectOVPresenter,
         projectSheetPresenter, followerPresenter, projectFilter, overviewChartPresenter,
         projectsStatsPresenter, timelineChartPresenter, model);

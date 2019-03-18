@@ -10,6 +10,7 @@ import com.vaadin.addon.charts.model.PlotOptionsColumnrange;
 import com.vaadin.addon.charts.model.Tooltip;
 import com.vaadin.addon.charts.model.XAxis;
 import com.vaadin.addon.charts.model.YAxis;
+import com.vaadin.addon.charts.model.style.FontWeight;
 import com.vaadin.addon.charts.model.style.SolidColor;
 import com.vaadin.addon.charts.model.style.Style;
 import java.util.Calendar;
@@ -86,10 +87,10 @@ public class TimelineChartView extends Chart {
     conf.getLegend().setEnabled(false);
 
     Style style = new Style();
-    style.setFontSize("10");
+    style.setFontSize("15");
     xAxis.getLabels().setPadding(0.1);
-    xAxis.getLabels().setStep(1);
     xAxis.getLabels().setReserveSpace(true);
+    xAxis.getLabels().setStep(1);
     xAxis.getLabels().setStyle(style);
 
     yAxis.getLabels().setStyle(style);

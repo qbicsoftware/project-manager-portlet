@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Set;
 import life.qbic.portal.portlet.project.ProjectBean;
 import life.qbic.portal.portlet.project.ProjectToProjectBeanConverter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
@@ -28,13 +30,15 @@ import life.qbic.portal.portlet.project.ProjectToProjectBeanConverter;
  */
 public class OpenBisConnection {
 
+  private static final Logger LOG = LogManager.getLogger(OpenBisConnection.class);
+
   private BeanItemContainer<ProjectBean> projectBeanBeanItemContainer = new BeanItemContainer<ProjectBean>(
       ProjectBean.class);
   private String sessionToken;
   private IApplicationServerApi app;
 
   public OpenBisConnection(IApplicationServerApi app, String sessionToken) {
-
+    LOG.info("Obtained new connection to openBIS using {} as a session token", sessionToken);
     this.app = app;
     this.sessionToken = sessionToken;
   }
