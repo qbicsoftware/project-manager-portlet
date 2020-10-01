@@ -82,7 +82,7 @@ public class ConnectionHandler {
     openBisUser = conf.getDataSourceUser();
     LOG.info("openBIS user = {}", openBisUser);
     openBisPw = conf.getDataSourcePassword();
-    openBisUrl = conf.getDataSourceUrl();
+    openBisUrl = conf.getDataSourceUrl() + "/openbis/openbis" ;
     userID = PortalUtils.getNonNullScreenName();
     if (mysqlUser == null || openBisUser == null) {
       LOG.info("No Liferay Portlet found. Getting user and passwords from local file {}", propertyFilePath);
