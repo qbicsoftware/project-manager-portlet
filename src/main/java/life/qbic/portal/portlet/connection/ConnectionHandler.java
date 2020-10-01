@@ -29,7 +29,7 @@ public class ConnectionHandler {
   private ProjectDatabase projectDatabase;
   private OpenBisConnection openBisConnection;
 
-  private String propertyFilePath = "/Users/spaethju/qbic-ext.properties";
+  private String propertyFilePath = "developer.properties";
 
   public ConnectionHandler(ProjectFilter projectFilter) {
     setCredentials();
@@ -53,7 +53,7 @@ public class ConnectionHandler {
 
       // get a reference to AS API
       IApplicationServerApi app = HttpInvokerUtils.createServiceStub(IApplicationServerApi.class,
-          openBisUrl + IApplicationServerApi.SERVICE_URL,
+          openBisUrl + "/openbis/openbis" + IApplicationServerApi.SERVICE_URL,
           10000);
 
       // TODO: login/loginAs? loginAs seems to return a null sessionToken
@@ -72,8 +72,8 @@ public class ConnectionHandler {
   public void setCredentials() {
     LOG.info("Set credentials");
     LOG.info("Using configuration manager {}", conf.getClass().getName());
-    LOG.info("System.getProperty(\"liferay.home\") -> {}", System.getProperty("liferay.home"));
-    LOG.info("PortletProps.get(\"liferay.home\") -> {}", PortletProps.get("liferay.home"));
+   // LOG.info("System.getProperty(\"liferay.home\") -> {}", System.getProperty("liferay.home"));
+  //  LOG.info("PortletProps.get(\"liferay.home\") -> {}", PortletProps.get("liferay.home"));
 
     mysqlUser = conf.getMysqlUser();
     LOG.info("mysql user = {}", mysqlUser);
@@ -84,7 +84,7 @@ public class ConnectionHandler {
     openBisUser = conf.getDataSourceUser();
     LOG.info("openBIS user = {}", openBisUser);
     openBisPw = conf.getDataSourcePassword();
-    openBisUrl = conf.getDataSourceApiUrl();
+    openBisUrl = conf.getDataSourceUrl();
     userID = PortalUtils.getNonNullScreenName();
     if (mysqlUser == null || openBisUser == null) {
       LOG.info("No Liferay Portlet found. Getting user and passwords from local file {}", propertyFilePath);
