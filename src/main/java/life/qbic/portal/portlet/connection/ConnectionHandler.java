@@ -53,7 +53,7 @@ public class ConnectionHandler {
 
       // get a reference to AS API
       IApplicationServerApi app = HttpInvokerUtils.createServiceStub(IApplicationServerApi.class,
-          openBisUrl + "/openbis/openbis" + IApplicationServerApi.SERVICE_URL,
+          openBisUrl + IApplicationServerApi.SERVICE_URL,
           10000);
 
       // TODO: login/loginAs? loginAs seems to return a null sessionToken
