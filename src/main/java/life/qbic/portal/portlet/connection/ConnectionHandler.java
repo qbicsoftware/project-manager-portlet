@@ -72,8 +72,6 @@ public class ConnectionHandler {
   public void setCredentials() {
     LOG.info("Set credentials");
     LOG.info("Using configuration manager {}", conf.getClass().getName());
-   // LOG.info("System.getProperty(\"liferay.home\") -> {}", System.getProperty("liferay.home"));
-  //  LOG.info("PortletProps.get(\"liferay.home\") -> {}", PortletProps.get("liferay.home"));
 
     mysqlUser = conf.getMysqlUser();
     LOG.info("mysql user = {}", mysqlUser);

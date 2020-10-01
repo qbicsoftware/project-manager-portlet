@@ -80,5 +80,7 @@ target/
 .factorypath
 .project
 .settings
+.DS_Store
+.flattened-pom.xml
 
 src/main/resources/developer.properties
