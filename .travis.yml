@@ -18,6 +18,7 @@ branches:
   only:
   - master
   - development
+  - /^hotfix\/.*$/
 
 # added to make logs look cleaner, crisper, certified fresh
 before_install: unset _JAVA_OPTIONS 
