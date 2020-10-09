@@ -27,6 +27,7 @@ hs_err_pid*
 
 # IntelliJ-specific files
 .idea/
+*.iml
 
 # CMake
 cmake-build-debug/
@@ -79,3 +80,7 @@ target/
 .factorypath
 .project
 .settings
+.DS_Store
+.flattened-pom.xml
+
+src/main/resources/developer.properties
