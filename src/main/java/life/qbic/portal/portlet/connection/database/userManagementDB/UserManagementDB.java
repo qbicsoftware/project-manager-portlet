@@ -21,10 +21,10 @@ public class UserManagementDB {
   private String database = "qbic_usermanagement_db";
 
   public UserManagementDB(String userName, String password, String hostname, String port) {
-    String connectionURI = "jdbc:mysql://" + hostname + ":" + port + "/" + database +"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CEST";
+    String connectionURI = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
 
     try {
-      Class.forName("com.mysql.cj.jdbc.Driver");
+      Class.forName("com.mysql.jdbc.Driver");
       conn = DriverManager.getConnection(connectionURI, userName, password);
 
       LOG.info("Connection to user management DB established.");
