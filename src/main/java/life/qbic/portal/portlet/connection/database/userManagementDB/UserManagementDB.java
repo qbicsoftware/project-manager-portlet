@@ -26,6 +26,7 @@ public class UserManagementDB {
     try {
       Class.forName("com.mysql.jdbc.Driver");
       conn = DriverManager.getConnection(connectionURI, userName, password);
+
       LOG.info("Connection to user management DB established.");
     } catch (SQLException e) {
       LOG.error("Connection to user management DB failed. [SQLException]");
