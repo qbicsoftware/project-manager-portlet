@@ -44,7 +44,10 @@ jobs:
       with:
         java-version: 1.8
         settings-path: ${{ github.workspace }}
-
+    - name: Setup Vaadin Charts License
+      run: echo $VAADIN_LICENSE > ~/.vaadin.charts.developer.license
+      env:
+        VAADIN_LICENSE: ${{ secrets.VAADIN_CHART_LICENSE_4 }}
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
