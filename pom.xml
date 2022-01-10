@@ -11,7 +11,7 @@
   </parent>
   <groupId>life.qbic</groupId>
   <artifactId>project-manager-portlet</artifactId>
-  <version>1.3.3</version>
+  <version>1.4.0-SNAPSHOT</version>
   <name>Project Manager Portlet</name>
   <url>https://github.com/qbicsoftware/project-manager-portlet</url>
   <description>Project manager portlet to view followed projects</description>
@@ -26,7 +26,7 @@
     <liferay.version>6.2.5</liferay.version>
     <liferay.maven.plugin.version>6.2.5</liferay.maven.plugin.version>
     <jetty.plugin.version>9.4.31.v20200723</jetty.plugin.version>
-    <log4j.version>2.17.0</log4j.version>
+    <log4j.version>2.17.1</log4j.version>
   </properties>
 
   <!-- we only need to tell maven where to find our parent pom and other QBiC dependencies -->
